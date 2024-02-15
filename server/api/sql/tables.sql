@@ -15,3 +15,10 @@ CREATE TABLE IF NOT EXISTS Users (
 -- 			(2, 'Test2', 'password', 'test@rit.edu', 'Tale of Nutz', '8 billion books', 'no friends :(', '8 billion hours' );
 
 ALTER SEQUENCE Users_user_id_seq RESTART WITH 3;
+
+CREATE TABLE IF NOT EXISTS Friends (
+	id SERIAL NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (friend_id) REFERENCES Users(user_id),
+	PRIMARY KEY (id)
+)
