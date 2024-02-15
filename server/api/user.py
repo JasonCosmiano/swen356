@@ -21,12 +21,18 @@ class User(Resource):
 
        # body params
        parser = reqparse.RequestParser()
+       parser.add_argument('username', type=str)
+       parser.add_argument('password', type=str)
+       parser.add_argument('email', type=str)
        parser.add_argument('currentBook', type=str)
        parser.add_argument('bookList', type=str)
        parser.add_argument('friendList', type=str)
        parser.add_argument('readingStats', type=str)
        
        args = parser.parse_args()
+       username = args['username']
+       password = args['password']
+       email = args['email']
        currentBook = args['currentBook']
        bookList = args['bookList']
        friendList = args['friendList']
