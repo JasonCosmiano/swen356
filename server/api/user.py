@@ -12,8 +12,7 @@ class User(Resource):
        Currently waiting on DB for sql command
        """
 
-       sql_command = """
-        """
+       sql_command = """SELECT * FROM Users;"""
        result = exec_get_all_as_dict(sql_command)
        return result
     
