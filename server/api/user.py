@@ -38,18 +38,23 @@ class User(Resource):
        result = exec_commit(sql_command, (currentBook, bookList, friendList, readingStats))
        return result
     
-class CreateUser(Resource):
     def post(self):
        """POST with body params"""
 
        # body params
        parser = reqparse.RequestParser()
+       parser.add_argument('username', type=str)
+       parser.add_argument('password', type=str)
+       parser.add_argument('email', type=str)
        parser.add_argument('currentBook', type=str)
        parser.add_argument('bookList', type=str)
        parser.add_argument('friendList', type=str)
        parser.add_argument('readingStats', type=str)
        
        args = parser.parse_args()
+       username = args['username']
+       password = args['password']
+       email = args['email']
        currentBook = args['currentBook']
        bookList = args['bookList']
        friendList = args['friendList']
@@ -57,6 +62,8 @@ class CreateUser(Resource):
        
        # INSERT INTO statement, pending on DB
        sql_command = """
+            INSERT INTO Users(username, password, email, currentBook, bookList, friendList, readingStats)
+            VALUES(%s, %s, %s, %s, %s, %s, %s)
         """
-       result = exec_commit(sql_command, (currentBook, bookList, friendList, readingStats))
+       result = exec_commit(sql_command, (username, password, email, currentBook, bookList, friendList, readingStats))
        return result
