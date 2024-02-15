@@ -39,6 +39,7 @@ class User(Resource):
        result = exec_commit(sql_command, (currentBook, bookList, friendList, readingStats))
        return result
     
+class CreateUser(Resource):
     def post(self):
        """POST with body params"""
 

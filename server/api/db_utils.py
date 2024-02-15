@@ -5,17 +5,17 @@ import psycopg2.extras
 
 # FROM SWEN 344
 
-# def connect():
-#     config = {}
-#     yml_path = os.path.join(os.path.dirname(__file__), 'db.yml')
-#     with open(yml_path, 'r') as file:
-#         config = yaml.load(file, Loader=yaml.FullLoader)
+def connect():
+    config = {}
+    yml_path = os.path.join(os.path.dirname(__file__), 'db.yml')
+    with open(yml_path, 'r') as file:
+        config = yaml.load(file, Loader=yaml.FullLoader)
 
-#     return psycopg2.connect(dbname=config['database'],
-#                             user=config['user'],
-#                             password=config['password'],
-#                             host=config['host'],
-#                             port=config['port'])
+    return psycopg2.connect(dbname=config['database'],
+                            user=config['user'],
+                            password=config['password'],
+                            host=config['host'],
+                            port=config['port'])
 
 def exec_sql_file(path):
     full_path = os.path.join(os.path.dirname(__file__), f'{path}')
