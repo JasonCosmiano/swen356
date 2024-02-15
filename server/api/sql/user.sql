@@ -8,4 +8,7 @@ CREATE TABLE IF NOT EXISTS "Users" (
 	"friendList" VARCHAR(255) NULL DEFAULT NULL,
 	"readingStats" VARCHAR(255) NULL DEFAULT NULL,
 	PRIMARY KEY ("user_id")
-)
+) ;
+
+INSERT INTO "Users"
+	VALUES (1, 'Test', 'password', 'test@rit.edu', 'Tale of Deez', '7 billion books', 'no friends :(', '7 billion hours' );
