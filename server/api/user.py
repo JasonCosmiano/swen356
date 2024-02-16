@@ -40,7 +40,7 @@ class User(Resource):
        # only update username
        if password == None and email == None and currentBook == None:
           sql_command = """
-                UPDATE User 
+                UPDATE Users 
                 SET username=%s
                 WHERE user_id=%s
             """
@@ -49,7 +49,7 @@ class User(Resource):
       # only update password
        elif username == None and email == None and currentBook == None:
           sql_command = """
-                UPDATE User 
+                UPDATE Users 
                 SET password=%s
                 WHERE user_id=%s
             """
@@ -58,7 +58,7 @@ class User(Resource):
       # only email 
        elif username == None and password == None and currentBook == None:
           sql_command = """
-                UPDATE User 
+                UPDATE Users 
                 SET email=%s
                 WHERE user_id=%s
             """
@@ -67,7 +67,7 @@ class User(Resource):
       # only currentBook password
        elif username == None and password == None and email == None:
           sql_command = """
-                UPDATE User 
+                UPDATE Users 
                 SET currentBook=%s
                 WHERE user_id=%s
             """
@@ -76,7 +76,7 @@ class User(Resource):
       # only username, password, email
        elif currentBook == None:
           sql_command = """
-                UPDATE User 
+                UPDATE Users 
                 SET username=%s, password=%s, email=%s
                 WHERE user_id=%s
             """
@@ -85,7 +85,7 @@ class User(Resource):
       # only currentBook, password, email
        elif username == None:
           sql_command = """
-                UPDATE User 
+                UPDATE Users 
                 SET currentBook=%s, password=%s, email=%s
                 WHERE user_id=%s
             """
@@ -95,7 +95,7 @@ class User(Resource):
       # only currentBook, password, username
        elif email == None:
           sql_command = """
-                UPDATE User 
+                UPDATE Users 
                 SET currentBook=%s, password=%s, username=%s
                 WHERE user_id=%s
             """
@@ -104,7 +104,7 @@ class User(Resource):
       # only currentBook, email, username
        elif password == None:
           sql_command = """
-                UPDATE User 
+                UPDATE Users 
                 SET currentBook=%s, email=%s, username=%s
                 WHERE user_id=%s
             """
@@ -113,7 +113,7 @@ class User(Resource):
       # only email, username
        elif password == None and currentBook == None:
           sql_command = """
-                UPDATE User 
+                UPDATE Users 
                 SET username=%s, email=%s
                 WHERE user_id=%s
             """
@@ -122,7 +122,7 @@ class User(Resource):
       # only password, username
        elif email == None and currentBook == None:
           sql_command = """
-                UPDATE User 
+                UPDATE Users 
                 SET username=%s, password=%s
                 WHERE user_id=%s
             """
@@ -131,7 +131,7 @@ class User(Resource):
       # only currentBook, username
        elif email == None and password == None:
           sql_command = """
-                UPDATE User 
+                UPDATE Users 
                 SET username=%s, currentBook=%s
                 WHERE user_id=%s
             """
@@ -140,7 +140,7 @@ class User(Resource):
       # only password, currentBook
        elif username == None and email == None:
           sql_command = """
-                UPDATE User 
+                UPDATE Users 
                 SET password=%s, currentBook=%s
                 WHERE user_id=%s
             """
@@ -149,7 +149,7 @@ class User(Resource):
       # only password, email
        elif username == None and currentBook == None:
           sql_command = """
-                UPDATE User 
+                UPDATE Users 
                 SET password=%s, email=%s
                 WHERE user_id=%s
             """
@@ -158,7 +158,7 @@ class User(Resource):
       # only currentBook, email
        elif username == None and password == None:
           sql_command = """
-                UPDATE User 
+                UPDATE Users 
                 SET currentBook=%s, email=%s
                 WHERE user_id=%s
             """
@@ -167,7 +167,7 @@ class User(Resource):
       # update everything
        else:
           sql_command = """
-                UPDATE User 
+                UPDATE Users 
                 SET currentBook=%s, email=%s, password=%s, username=%s
                 WHERE user_id=%s
             """
@@ -213,7 +213,7 @@ class SingleUser(Resource):
          WHERE user_id = %(_id)s;
       """
 
-      result = exec_commit(sql_command, {'_id':id}) # returns number of records
+      result = exec_get_all_as_dict(sql_command, {'_id':id}) # returns number of records
 
       if result == 0:
          return "USER DOES NOT EXIST"
