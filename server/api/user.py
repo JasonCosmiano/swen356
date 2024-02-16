@@ -5,10 +5,9 @@ from .db_utils import *
 
 class User(Resource):
 
-
     def get(self):
        """
-       Get a user's info
+       Get all user's info
        Currently waiting on DB for sql command
        """
 
@@ -37,9 +36,10 @@ class User(Resource):
        bookList = args['bookList']
        friendList = args['friendList']
        readingStats = args['readingStats']
-       
+
        # update statement, pending on DB
        sql_command = """
+
         """
        result = exec_commit(sql_command, (currentBook, bookList, friendList, readingStats))
        return result
@@ -53,23 +53,41 @@ class User(Resource):
        parser.add_argument('password', type=str)
        parser.add_argument('email', type=str)
        parser.add_argument('currentBook', type=str)
-       parser.add_argument('bookList', type=str)
-       parser.add_argument('friendList', type=str)
-       parser.add_argument('readingStats', type=str)
        
        args = parser.parse_args()
        username = args['username']
        password = args['password']
        email = args['email']
        currentBook = args['currentBook']
-       bookList = args['bookList']
-       friendList = args['friendList']
-       readingStats = args['readingStats']
+
+       # if statements
        
        # INSERT INTO statement, pending on DB
        sql_command = """
-            INSERT INTO Users(username, password, email, currentBook, bookList, friendList, readingStats)
+            INSERT INTO Users(username, password, email, currentBook)
             VALUES(%s, %s, %s, %s, %s, %s, %s)
         """
-       result = exec_commit(sql_command, (username, password, email, currentBook, bookList, friendList, readingStats))
+       result = exec_commit(sql_command, (username, password, email, currentBook))
        return result
+    
+class SingleUser(Resource):
+
+   def get(self, id):
+      """
+      Get all user's info
+      Currently waiting on DB for sql command
+      """
+
+      sql_command = """
+         SELECT * 
+         FROM Users 
+         WHERE user_id = %(_id)s;
+      """
+
+      result = exec_commit(sql_command, {'_id':id}) # returns number of records
+
+      if result == 0:
+         return "USER DOES NOT EXIST"
+      
+      return result
+    

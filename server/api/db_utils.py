@@ -63,3 +63,12 @@ def exec_commit(sql, args={}):
     conn.commit()
     conn.close()
     return result
+
+def exec_insert_update_delete(sql, args={}):
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute(sql, args)
+    result = cur.rowcount
+    conn.commit()
+    conn.close()
+    return result

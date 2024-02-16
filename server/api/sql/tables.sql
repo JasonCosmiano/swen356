@@ -1,24 +1,38 @@
-CREATE TABLE IF NOT EXISTS Users (
+DROP TABLE IF EXISTS Users CASCADE;
+DROP TABLE IF EXISTS Friends CASCADE;
+
+-- Users table
+-- CREATE TABLE IF NOT EXISTS Users (
+	CREATE TABLE Users (
 	user_id SERIAL NOT NULL,
-	username VARCHAR(255) NOT NULL,
-	password VARCHAR(255) NOT NULL,
-	email VARCHAR(255) NOT NULL,
-	currentBook VARCHAR(255) NULL DEFAULT NULL,
-	bookList VARCHAR(255) NULL DEFAULT NULL,
-	friendList VARCHAR(255) NULL DEFAULT NULL,
-	readingStats VARCHAR(255) NULL DEFAULT NULL,
+	username VARCHAR(25) NOT NULL,
+	password VARCHAR(25) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	currentBook INT NULL DEFAULT NULL,
 	PRIMARY KEY (user_id)
+	-- FOREIGN KEY (currentBook) REFERENCES Book(id)
 ) ;
 
--- INSERT INTO Users
--- 	VALUES (1, 'Test', 'password', 'test@rit.edu', 'Tale of Deez', '7 billion books', 'no friends :(', '7 billion hours' ),
--- 			(2, 'Test2', 'password', 'test@rit.edu', 'Tale of Nutz', '8 billion books', 'no friends :(', '8 billion hours' );
+INSERT INTO Users
+	VALUES (1, 'Test', 'password', 'test@rit.edu', 1),
+			(2, 'Test2', 'password', 'test@rit.edu', 2),
+			(3, 'Test3', 'password', 'test@rit.edu', 2),
+			(4, 'Test4', 'password', 'test@rit.edu', 2);
 
-ALTER SEQUENCE Users_user_id_seq RESTART WITH 3;
+ALTER SEQUENCE Users_user_id_seq RESTART WITH 5;
 
-CREATE TABLE IF NOT EXISTS Friends (
-	id SERIAL NOT NULL,
+----------------------------------------------------------------------------------
+-- Friends table
+
+-- CREATE TABLE IF NOT EXISTS Friends (
+	CREATE TABLE Friends (
+	user_id INT NOT NULL,
+	friend_id INT NOT NULL,
 	FOREIGN KEY (user_id) REFERENCES Users(user_id),
     FOREIGN KEY (friend_id) REFERENCES Users(user_id),
-	PRIMARY KEY (id)
-)
+	PRIMARY KEY (user_id, friend_id)
+);
+
+INSERT INTO  Friends
+	VALUES(1, 2),
+		(2, 1);
