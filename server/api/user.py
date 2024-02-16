@@ -59,7 +59,7 @@ class User(Resource):
        password = args['password']
        email = args['email']
        currentBook = args['currentBook']
-
+                 
        # if statements
        
        # INSERT INTO statement, pending on DB
@@ -70,6 +70,7 @@ class User(Resource):
        result = exec_commit(sql_command, (username, password, email, currentBook))
        return result
     
+       
 class SingleUser(Resource):
 
    def get(self, id):
@@ -90,4 +91,17 @@ class SingleUser(Resource):
          return "USER DOES NOT EXIST"
       
       return result
-    
+   
+   def delete(self, id):
+      """
+      Deletes a user based on id
+      """    
+
+      sql_command = """
+      DELETE 
+      FROM Users
+      WHERE user_id = %d;
+   """
+      
+      result = exec_commit(sql_command, id)
+      return result
