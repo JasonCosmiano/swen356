@@ -1,5 +1,5 @@
 import unittest
-from tests.test_utils import *
+from test_utils import *
 from db.data import rebuild_tables
 import json
 
