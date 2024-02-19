@@ -41,14 +41,15 @@ INSERT INTO  Friends
 DROP TABLE IF EXISTS Books CASCADE;
 
 CREATE TABLE Books(
-	bookID				INT NOT NULL AUTO_INCREMENT,
+	id					INT NOT NULL AUTO_INCREMENT, --isbn?
 	title				VARCHAR(100),
 	genre				VARCHAR(20),
 	author				VARCHAR(50),
-	numberOfPages		INT,
+	page_count			INT,
 	publisher			VARCHAR(20),
 	value				MONEY,
-	pubDate				DATE
+	pub_date			DATE,
+	PRIMARY KEY (id)
 );
 
 INSERT INTO Books (title, genre, author, numberOfPages, value)
