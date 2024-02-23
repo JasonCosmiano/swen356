@@ -1,10 +1,13 @@
 import unittest
-from test_utils import *
-from db.data import rebuild_tables
+
+from server.tests.test_utils import *
+from server.db.data import rebuild_tables
 import json
 
-class TestUser(unittest.TestCase):
 
+
+class TestUser(unittest.TestCase):
+    
     def setUp(self):
         """Rebuild tables before each test"""
         rebuild_tables()
