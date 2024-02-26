@@ -34,7 +34,7 @@ class User(Resource):
        # INSERT INTO statement, pending on DB
        sql_command = """
             INSERT INTO Users(username, password, email, currentBook)
-            VALUES(%s, %s, %s, %s, %s, %s, %s)
+            VALUES(%s, %s, %s, %s)
         """
        result = exec_insert_update_delete(sql_command, (username, password, email, currentBook))
        

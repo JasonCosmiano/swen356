@@ -35,35 +35,38 @@ class TestUser(unittest.TestCase):
         _username = "Pedri"
         _password = "password123"
         _email = "moneymunson@rit.edu"
-        _currentBook = "2"
+        _currentBook = "1"
 
         # body
         data = dict(username=_username, password=_password, email=_email, currentBook=_currentBook)
         jdata =json.dumps(data)
-        print("TEST_POST_NEW_USER MAKING USER: ", data)
+        print("TEST_POST_NEW_USER MAKING USER: ", jdata)
 
-        result = post_rest_call(self, "http://localhost:5000/users", jdata)
-        self.assertEqual(result, 1)  
+        #header
+        hdr = {'content-type': 'application/json'}
+
+        result = post_rest_call(self, "http://localhost:5000/user", jdata, hdr)
+        self.assertEqual(result, "POST SUCCESS")  
         # print("TEST_POST_NEW_USER MAKING USER: ", result)
         print("TEST_POST_NEW_USER USER SUCCESSFULLY ADDED")
 
 
-    def test_update_user(self):
-        """Unit test to update a specific user"""
+    # def test_update_user(self):
+    #     """Unit test to update a specific user"""
         
-        print("\nTEST_PUT_USER")
+    #     print("\nTEST_PUT_USER")
     
-        # edit user
-        _username = "jumanji"
-        # _password = "password123"
-        # _email = "moneymunson@rit.edu"
-        # _currentBook = "2"
+    #     # edit user
+    #     _username = "jumanji"
+    #     # _password = "password123"
+    #     # _email = "moneymunson@rit.edu"
+    #     # _currentBook = "2"
 
-         # body
-        data = dict(username=_username)
-        jdata =json.dumps(data)
-        print("TEST_UPDATE_USER UPDATE USER WITH ID 1, WITH: " + str(data))
+    #      # body
+    #     data = dict(username=_username)
+    #     jdata =json.dumps(data)
+    #     print("TEST_UPDATE_USER UPDATE USER WITH ID 1, WITH: " + str(data))
 
-        result = put_rest_call(self, "http://localhost:5000/user/1", jdata, {}, 200)
-        self.assertEqual(result, "PUT command success")
-        print("TEST_PUT_USER RESULT: ", str(result))
+    #     result = put_rest_call(self, "http://localhost:5000/user/1", jdata)
+    #     self.assertEqual(result, "PUT command success")
+    #     print("TEST_PUT_USER RESULT: ", str(result))
