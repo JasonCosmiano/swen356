@@ -36,3 +36,23 @@ ALTER SEQUENCE Users_user_id_seq RESTART WITH 5;
 INSERT INTO  Friends
 	VALUES(1, 2),
 		(2, 1);
+
+--Books Table
+DROP TABLE IF EXISTS Books CASCADE;
+
+CREATE TABLE Books(
+	id					INT NOT NULL AUTO_INCREMENT, --isbn?
+	title				VARCHAR(100),
+	genre				VARCHAR(20),
+	author				VARCHAR(50),
+	page_count			INT,
+	publisher			VARCHAR(20),
+	value				MONEY,
+	pub_date			DATE,
+	PRIMARY KEY (id)
+);
+
+INSERT INTO Books (title, genre, author, numberOfPages, value)
+	VALUES ('Book A', 'Genre A', 'John Doe', 100, 99.99),
+	('Book B', 'Genre B', 'Jane Doe', 200, 59.99),
+	('Book C', 'Genre C', 'Sally Smith', 300, 16.49);
