@@ -6,7 +6,7 @@ function Header() {
       <nav className="navigation">
         <a href="/home">Home</a>
         <a href="/friends">Friends</a>
-        <a href="/reviews">Reviews</a>
+        <a href="ReviewsPage">Reviews</a>
         <a href="/books">Books</a>
         <a href="/profile">Profile</a>
       </nav>
