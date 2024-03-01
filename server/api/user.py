@@ -80,11 +80,6 @@ class SingleUser(Resource):
        password = args['password']
        email = args['email']
        currentBook = args['currentBook'] 
-    #    user_id = args['user_id'] 
-
-    #    # init messages
-    #    message = "PUT command falied"
-    #    a_dict = {'message':message} 
 
        # only update username
        if password == None and email == None and currentBook == None:
