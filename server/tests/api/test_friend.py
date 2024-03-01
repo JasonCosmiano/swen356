@@ -17,7 +17,13 @@ class TestFriend(unittest.TestCase):
         expected = 1
         actual = get_rest_call(self, 'http://localhost:5000/friend/1') # invoke
         self.assertEqual(expected, len(actual)) # analyze
-        print("TEST_GET_USER PASS")
+        print("TEST_GET_FRIEND PASS")
+
+    def test_get_friend_nonexistent(self):
+        """Unit test to get friend of nonexistent user"""
+        actual = get_rest_call(self, 'http://localhost:5000/friend/100') # invoke
+        self.assertEqual("USER DOES NOT EXIST", actual) # analyze
+        print("TEST_GET_FRIEND_NONEXISTENT PASS")
 
     def test_post_friends(self):
         """ Add a friend """
@@ -36,3 +42,5 @@ class TestFriend(unittest.TestCase):
 
         result = post_rest_call(self, "http://localhost:5000/friend/1", jdata, hdr)
         self.assertEqual(result, "FOLLOW FRIEND SUCCESS") 
+
+    

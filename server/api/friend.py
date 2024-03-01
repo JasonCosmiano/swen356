@@ -19,7 +19,7 @@ class Friend(Resource):
       """
        result = exec_get_all_as_dict(sql_command, {'_id':id})
        
-       if result == 0:
+       if result == []:
           return "USER DOES NOT EXIST"
        
        return result
