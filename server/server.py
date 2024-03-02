@@ -21,5 +21,6 @@ if __name__ == '__main__':
     print("Loading db")
     # sql file pending
     exec_sql_file('sql/tables.sql')
+    # call load_books.py
     print("Starting flask")
     app.run(debug=True), #starts Flask
