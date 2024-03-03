@@ -41,7 +41,7 @@ INSERT INTO  Friends
 DROP TABLE IF EXISTS Books CASCADE;
 
 CREATE TABLE Books(
-	id					INT NOT NULL AUTO_INCREMENT, --isbn?
+	id					SERIAL NOT NULL, --isbn?
 	title				VARCHAR(100),
 	genre				VARCHAR(20),
 	author				VARCHAR(50),
@@ -52,7 +52,7 @@ CREATE TABLE Books(
 	PRIMARY KEY (id)
 );
 
-INSERT INTO Books (title, genre, author, numberOfPages, value)
+INSERT INTO Books (title, genre, author, page_count, value)
 	VALUES ('Book A', 'Genre A', 'John Doe', 100, 99.99),
 	('Book B', 'Genre B', 'Jane Doe', 200, 59.99),
 	('Book C', 'Genre C', 'Sally Smith', 300, 16.49);
