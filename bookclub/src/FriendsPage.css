@@ -9,6 +9,9 @@
   .suggested-friends {
     width: 50%; 
   }
-  
- 
+
+  .suggested-friends h2 {
+    margin-left: 375px;
+    margin-top:  60px;
+  }
   

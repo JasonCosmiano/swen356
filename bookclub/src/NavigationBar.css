@@ -17,4 +17,13 @@
     text-decoration: underline;
   }
   
-  
+  /* NavigationBar.css */
+.navigation div {
+  cursor: pointer; 
+  color: #000; 
+  text-decoration: none; 
+}
+
+.navigation div:hover {
+  color: blue; 
+}

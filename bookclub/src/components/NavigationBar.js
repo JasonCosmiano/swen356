@@ -1,14 +1,14 @@
-// src/components/NavigationBar.js
+// NavigationBar.js
 import React from 'react';
 import '../NavigationBar.css';
 
-const NavigationBar = () => (
+const NavigationBar = ({ setCurrentPage }) => (
   <nav className="navigation">
-    <a href="/home">Home</a>
-    <a href="/friends">Friends</a>
-    <a href="/reviews">Reviews</a>
-    <a href="/books">Books</a>
-    <a href="/profile">Profile</a>
+    <div onClick={() => setCurrentPage('home')}>Home</div>
+    <div onClick={() => setCurrentPage('friends')}>Friends</div>
+    <div onClick={() => setCurrentPage('home')}>Review</div>
+    <div onClick={() => setCurrentPage('books')}>Books</div>
+    <div onClick={() => setCurrentPage('home')}>Profile</div>
   </nav>
 );
 

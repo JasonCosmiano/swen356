@@ -16,7 +16,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
 
 </p>
       <div className="book-tags">
-        <p>Tags: Tag1 Tag2 Tag3 Tag4</p>
+      Tags: <span>Tag1</span> <span>Tag2</span> <span>Tag3</span> <span>Tag4</span>
       </div>
     </div>
     <div className="book-picture-container">

@@ -5,6 +5,8 @@
     border: 1px solid #ccc;
     margin-bottom: 10px;
     padding: 10px;
+    margin-left: 23.5em;
+    width: 25em;
   }
   
   .suggestion-profile-picture {
@@ -21,6 +23,6 @@
   }
   
   .suggestion-info button {
-    /* Style your button here */
+    /* Style button here */
   }
   

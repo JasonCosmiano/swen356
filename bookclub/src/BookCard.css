@@ -43,7 +43,8 @@
     }
   }
   
-  .book-tags  {
-    margin-top: 19.5em;
+  .book-tags span {
+    background-color: #eee;
+    padding: 5px;
+    margin-right: 5px;
   }
-  
