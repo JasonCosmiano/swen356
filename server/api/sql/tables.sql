@@ -1,5 +1,11 @@
 DROP TABLE IF EXISTS Users CASCADE;
 DROP TABLE IF EXISTS Friends CASCADE;
+DROP TABLE IF EXISTS Reviews CASCADE;
+DROP TABLE IF EXISTS Books CASCADE;
+DROP TABLE IF EXISTS Comments CASCADE;
+
+
+
 
 -- Users table
 -- CREATE TABLE IF NOT EXISTS Users (
@@ -56,3 +62,25 @@ INSERT INTO Books (title, genre, author, page_count, value)
 	VALUES ('Book A', 'Genre A', 'John Doe', 100, 99.99),
 	('Book B', 'Genre B', 'Jane Doe', 200, 59.99),
 	('Book C', 'Genre C', 'Sally Smith', 300, 16.49);
+
+CREATE TABLE IF NOT EXISTS Reviews (
+	id SERIAL NOT NULL, 
+	user_id INT NOT NULL, 
+	FOREIGN KEY (user_id) REFERENCES Users(user_id),
+	title VARCHAR (255) NOT NULL, 
+	book_id INT NOT NULL, 
+	FOREIGN KEY (book_id) REFERENCES Books(id),
+	body VARCHAR (255) NOT NULL,
+	rating int NOT NULL, 
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS Comments (
+	id SERIAL NOT NULL, 
+	review_id INT NOT NULL,
+	FOREIGN KEY (review_id) REFERENCES Reviews(id),
+	user_id INT NOT NULL, 
+	FOREIGN KEY (user_id) REFERENCES Users(user_id),
+	reply VARCHAR (255) NOT NULL,
+	PRIMARY KEY (id)
+);
