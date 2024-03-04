@@ -1,0 +1,31 @@
+version: 2.1
+orbs:
+  python: circleci/python@2.0.3
+  heroku: circleci/heroku@1.2.6
+
+jobs:
+  bulld:
+    docker:
+      - image: cimg/python:3.10
+        environment:
+          TEST_DATABASE_URL: postgresql://postgres@localhost/swen356
+
+      - image: cimg/postgres:14.0
+        environment:
+          POSTGRES_USER: postgres
+
+    executor: python/default
+    steps:
+      - checkout
+      - run: sudo apt-get update
+      - run: sudo apt-get install postgresql-client
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Run tests
+          command: python -m pytest
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+
