@@ -1,14 +1,14 @@
 // FriendCard.js
 import React from 'react';
-import './FriendCard.css'; 
+import '../FriendCard.css';
 
-function FriendCard({ friend }) {
+function FriendCard({ name, lastMessage }) {
   return (
     <div className="friend-card">
-      <img src={friend.profilePicture} alt={`${friend.username}'s profile`} />
+      <div className="friend-profile-picture">PFP</div>
       <div className="friend-info">
-        <h3>{friend.username}</h3>
-        <p>Last message {friend.lastMessageTime} ago</p>
+        <h3>{name}</h3>
+        <p>Last message {lastMessage} days ago</p>
       </div>
     </div>
   );

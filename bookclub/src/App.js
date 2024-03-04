@@ -1,27 +1,22 @@
+// src/App.js
 import React from 'react';
 import Header from './components/Header';
+import NavigationBar from './components/NavigationBar';
 import SearchBar from './components/SearchBar';
 import BookCard from './components/BookCard';
-import ReviewSection from './components/ReviewSection';
-import ActivityFeed from './components/ActivityFeed';
-import './App.css'; 
+import RecentActivity from './components/RecentActivity';
+import ReactionButtons from './components/ReactionButtons';
+import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <div style={{ display: 'flex' }}>
-      <div className="logo">BCLogo</div>
-      <div className="maintitle">Book Club</div>
-      <SearchBar />
+const App = () => (
+  <div className="app">
+    <Header />
+    <NavigationBar />
+    <div className="content">
+      <BookCard />
+      <RecentActivity />
     </div>
-      <Header />
-      <div className="main-content">
-        <BookCard />
-        <ReviewSection />
-        <ActivityFeed />
-      </div>
-    </div>
-  );
-}
+  </div>
+);
 
 export default App;

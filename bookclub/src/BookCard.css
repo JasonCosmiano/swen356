@@ -1,0 +1,49 @@
+/* BookCard.css */
+.book-card {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px; 
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-left: 10em;
+  }
+  
+  .book-info {
+    flex: 1; 
+    padding-right: 20px;
+  }
+  
+  .book-info h2 {
+    margin-top: 0;
+    /* Additional styling for the title */
+  }
+  
+  
+  .book-picture {
+    width: 330px; 
+    height: 510px;
+    margin-left: 20px; 
+    background-color: #ddd;
+  }
+  
+  /* Responsive design adjustments */
+  @media (max-width: 768px) {
+    .book-card {
+      flex-direction: column;
+    }
+  
+    .book-info p {
+      max-width: 100%; 
+    }
+  
+    .book-picture {
+      width: 100%; 
+      height: auto; 
+      margin-left: 0; 
+    }
+  }
+  
+  .book-tags  {
+    margin-top: 19.5em;
+  }
+  

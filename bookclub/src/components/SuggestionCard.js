@@ -1,17 +1,14 @@
 // SuggestionCard.js
 import React from 'react';
-import './SuggestionCard.css'; // Your CSS file for styling
+import '../SuggestionCard.css';
 
-function SuggestionCard({ suggestion }) {
-  const handleAddFriend = () => {
-  };
-
+function SuggestionCard({ name, onAdd }) {
   return (
     <div className="suggestion-card">
-      <img src={suggestion.profilePicture} alt={`${suggestion.username}'s profile`} />
+      <div className="suggestion-profile-picture">PFP</div>
       <div className="suggestion-info">
-        <h3>{suggestion.username}</h3>
-        <button onClick={handleAddFriend}>+</button>
+        <h3>{name}</h3>
+        <button onClick={onAdd}>+</button>
       </div>
     </div>
   );

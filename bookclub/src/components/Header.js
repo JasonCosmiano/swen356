@@ -1,17 +1,14 @@
+// src/components/Header.js
 import React from 'react';
+import SearchBar from './SearchBar';
+import '../Header.css';
 
-function Header() {
-  return (
-    <div className="header">
-      <nav className="navigation">
-        <a href="/home">Home</a>
-        <a href="/friends">Friends</a>
-        <a href="ReviewsPage">Reviews</a>
-        <a href="/books">Books</a>
-        <a href="/profile">Profile</a>
-      </nav>
-    </div>
-  );
-}
+const Header = () => (
+  <header className="header">
+    <div className="logo-placeholder"></div>
+    <h1>BookClub</h1>
+    <SearchBar />
+  </header>
+);
 
 export default Header;
