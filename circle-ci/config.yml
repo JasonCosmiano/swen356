@@ -24,6 +24,15 @@ jobs:
           command: python --version
 
       - run:
+          name: Debug database connection
+          command: |
+            echo "Database connection details:"
+            echo "Host: $POSTGRES_HOST"
+            echo "Port: $POSTGRES_PORT"
+            echo "Database: $POSTGRES_DB"
+            echo "Username: $POSTGRES_USER"
+
+      - run:
           name: Start server
           command: |
             python server/server.py &
