@@ -19,10 +19,6 @@ jobs:
             pip install -r requirements.txt
 
       - run:
-          name: Copy configuration files
-          command: cp config/gitlab-credentials.yml config/db.yml
-
-      - run:
           name: Check Python version
           command: python --version
 
