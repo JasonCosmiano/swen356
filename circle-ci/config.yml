@@ -6,7 +6,7 @@ jobs:
       - image: circleci/python:3.7
 
     environment:
-      POSTGRES_HOST: postgres
+      POSTGRES_HOST: 127.0.0.1
       POSTGRES_PORT: 5432  
       POSTGRES_DB: swen356
       POSTGRES_USER: swen356CIUser
