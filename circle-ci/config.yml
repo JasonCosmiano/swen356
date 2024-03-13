@@ -32,9 +32,9 @@ jobs:
           command: |
             sudo service postgresql start
         
-            - run:
-                name: Check Python version
-                command: python --version
+      - run:
+            name: Check Python version
+            command: python --version
 
       - run:
           name: Debug database connection
