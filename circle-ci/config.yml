@@ -1,32 +1,55 @@
-image:
-  name: bookclub
+version: 2.1
 
-services:
-  
-postgres:11
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.7
 
-variables:
-  POSTGRES_DB: swen356
-  POSTGRES_USER: swen356CIUser
-  POSTGRES_PASSWORD: bubbles987
+    environment:
+      POSTGRES_DB: swen356
+      POSTGRES_USER: swen356CIUser
+      POSTGRES_PASSWORD: bubbles987
 
-before_script:
-  
-pip install -r requirements.txt
-cp config/gitlab-credentials.yml config/db.yml
-python --version
-python src/server.py & # fire up the server before we run our tests
+    steps:
+      - checkout
 
-  
-sleep 3
+      - run:
+          name: Install dependencies
+          command: |
+            pip install -r requirements.txt
 
-testrunner:
-  script:
-    
-python -m unittest -v # run the unit tests; -v prints the test being run
+      - run:
+          name: Copy configuration files
+          command: cp config/gitlab-credentials.yml config/db.yml
 
-    # - pytest # optional, use instead of unittest. friendlier output.
+      - run:
+          name: Check Python version
+          command: python --version
 
-    # - curl http://localhost:5000/ # you can also debug a failure with curl
+      - run:
+          name: Start server
+          command: |
+            python src/server.py &
+            sleep 3
 
-  stage: test
+      - run:
+          name: Run unit tests
+          command: python -m unittest -v
+
+      # Optionally, you can use pytest instead of unittest
+      # - run:
+      #     name: Run unit tests
+      #     command: pytest
+
+      # Optionally, you can debug a failure with curl
+      # - run:
+      #     name: Debug failure
+      #     command: curl http://localhost:5000/
+
+  # Define more jobs if needed (e.g., deploy, etc.)
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
