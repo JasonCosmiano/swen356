@@ -22,8 +22,19 @@ jobs:
             pip install Flask Flask-RESTful Flask-CORS
 
       - run:
-          name: Check Python version
-          command: python --version
+          name: Install PostgreSQL
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y postgresql
+      
+      - run:
+          name: Start PostgreSQL Service
+          command: |
+            sudo service postgresql start
+        
+            - run:
+                name: Check Python version
+                command: python --version
 
       - run:
           name: Debug database connection
