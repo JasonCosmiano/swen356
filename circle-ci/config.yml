@@ -28,6 +28,7 @@ jobs:
       - run:
           name: Debug database connection
           command: |
+            sudo service postgresql status
             echo "Attempting to connect to the database..."
             nc -vz $POSTGRES_HOST $POSTGRES_PORT
 
