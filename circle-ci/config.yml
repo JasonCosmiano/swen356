@@ -1,13 +1,13 @@
 image:
-  name: ritse/swen344db:latest
+  name: bookclub
 
 services:
   
 postgres:11
 
 variables:
-  POSTGRES_DB: swen344DB
-  POSTGRES_USER: swen344CIUser
+  POSTGRES_DB: swen356
+  POSTGRES_USER: swen356CIUser
   POSTGRES_PASSWORD: bubbles9874
 
 before_script:
