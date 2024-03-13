@@ -8,7 +8,7 @@ postgres:11
 variables:
   POSTGRES_DB: swen356
   POSTGRES_USER: swen356CIUser
-  POSTGRES_PASSWORD: bubbles9874
+  POSTGRES_PASSWORD: bubbles987
 
 before_script:
   
