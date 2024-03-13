@@ -28,11 +28,8 @@ jobs:
       - run:
           name: Debug database connection
           command: |
-            echo "Database connection details:"
-            echo "Host: $POSTGRES_HOST"
-            echo "Port: $POSTGRES_PORT"
-            echo "Database: $POSTGRES_DB"
-            echo "Username: $POSTGRES_USER"
+            echo "Attempting to connect to the database..."
+            nc -vz $POSTGRES_HOST $POSTGRES_PORT
 
       - run:
           name: Start server
