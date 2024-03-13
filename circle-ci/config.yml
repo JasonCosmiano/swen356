@@ -31,6 +31,7 @@ jobs:
           name: Start PostgreSQL Service
           command: |
             sudo service postgresql start
+            psql -U postgres -c "CREATE USER swen365CIUser WITH PASSWORD 'bubbles987';"
         
       - run:
             name: Check Python version
