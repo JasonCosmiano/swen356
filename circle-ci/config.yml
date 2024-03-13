@@ -17,6 +17,7 @@ jobs:
           name: Install dependencies
           command: |
             pip install -r requirements.txt
+            pip install Flask
 
       - run:
           name: Check Python version
