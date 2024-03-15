@@ -4,6 +4,7 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.7
+      - image: circleci/postgres:13-alpine  # Adding PostgreSQL Docker image
 
     environment:
       POSTGRES_HOST: localhost
@@ -20,27 +21,15 @@ jobs:
           command: |
             pip install -r requirements.txt
             pip install Flask Flask-RESTful Flask-CORS
-
-      - run:
-          name: Install PostgreSQL
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y postgresql
       
       - run:
-          name: Start PostgreSQL Service
-          command: |
-            sudo service postgresql start
-            sudo -u postgres psql -c "CREATE USER swen365CIUser WITH PASSWORD 'bubbles987';"
-        
-      - run:
-            name: Check Python version
-            command: python --version
+          name: Check Python version
+          command: python --version
 
       - run:
           name: Debug database connection
           command: |
-            sudo service postgresql status
+            docker ps  # Check if PostgreSQL container is running
             echo "Attempting to connect to the database..."
             nc -vz $POSTGRES_HOST $POSTGRES_PORT
 
@@ -53,16 +42,6 @@ jobs:
       - run:
           name: Run unit tests
           command: python -m unittest -v
-
-      # Optionally, you can use pytest instead of unittest
-      # - run:
-      #     name: Run unit tests
-      #     command: pytest
-
-      # Optionally, you can debug a failure with curl
-      # - run:
-      #     name: Debug failure
-      #     command: curl http://localhost:5000/
 
   # Define more jobs if needed (e.g., deploy, etc.)
 
