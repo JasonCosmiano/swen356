@@ -21,7 +21,7 @@ jobs:
           command: |
             pip install -r requirements.txt
             pip install Flask Flask-RESTful Flask-CORS
-            docker ps -a 
+            docker ps 
       
       - run:
           name: Check Python version
