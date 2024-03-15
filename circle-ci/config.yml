@@ -21,6 +21,11 @@ jobs:
           command: |
             pip install -r requirements.txt
             pip install Flask Flask-RESTful Flask-CORS
+
+      - run:
+          name: Create PostgreSQL user
+          command: |
+            psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -d $POSTGRES_DB -c "CREATE ROLE swen365CIUser WITH LOGIN PASSWORD 'bubbles987';"
       
       - run:
           name: Check Python version
