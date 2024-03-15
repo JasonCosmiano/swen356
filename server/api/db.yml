@@ -1,4 +1,4 @@
-host: postgres
+host: localhost
 database: swen356
 user: swen365CIUser
 password: bubbles987
