@@ -23,9 +23,16 @@ jobs:
             pip install Flask Flask-RESTful Flask-CORS
 
       - run:
+          name: Install PostgreSQL client
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y postgresql-client
+      
+      - run:
           name: Create PostgreSQL user
           command: |
             psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -d $POSTGRES_DB -c "CREATE ROLE swen365CIUser WITH LOGIN PASSWORD 'bubbles987';"
+      
       
       - run:
           name: Check Python version
