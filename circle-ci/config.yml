@@ -7,8 +7,6 @@ jobs:
       - image: cimg/postgres:13.14
 
     environment:
-      POSTGRES_HOST: localhost
-      POSTGRES_PORT: 5432  
       POSTGRES_DB: swen356
       POSTGRES_USER: swen356CIUser
       POSTGRES_PASSWORD: bubbles987
