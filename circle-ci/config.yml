@@ -27,11 +27,8 @@ jobs:
           command: python --version
 
       - run:
-          name: Debug database connection
-          command: |
-            docker ps  # Check if PostgreSQL container is running
-            echo "Attempting to connect to the database..."
-            nc -vz $POSTGRES_HOST $POSTGRES_PORT
+          name: Start Docker service
+          command: sudo service docker start
 
       - run:
           name: Start server
