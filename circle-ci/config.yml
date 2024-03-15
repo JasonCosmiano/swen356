@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.7
-      - image: circleci/postgres:13-alpine  # Adding PostgreSQL Docker image
+      - image: circleci/postgres:13.4-alpine  # Adding PostgreSQL Docker image
 
     environment:
       POSTGRES_HOST: localhost
