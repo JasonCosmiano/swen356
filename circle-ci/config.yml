@@ -3,12 +3,13 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/python:3.7
-      - image: cimg/postgres:13.14
-
+      - image: bookclub
+    working_directory: ~/app
+    services:
+      - postgres:11
     environment:
-      POSTGRES_DB: swen356
-      POSTGRES_USER: swen356CIUser
+      POSTGRES_DB: swen365
+      POSTGRES_USER: swen365CIUser
       POSTGRES_PASSWORD: bubbles987
 
     steps:
@@ -17,27 +18,19 @@ jobs:
       - run:
           name: Install dependencies
           command: |
+            apt-get update && apt-get install -y python3-pip
             pip install -r requirements.txt
-            pip install Flask Flask-RESTful Flask-CORS
-      
+
       - run:
-          name: Check Python version
-          command: python --version
-          
-      - run:
-          name: Start server
+          name: Run tests
           command: |
-            python server/server.py &
-            sleep 3
-
-      - run:
-          name: Run unit tests
-          command: python -m unittest -v
-
-  # Define more jobs if needed (e.g., deploy, etc.)
+            python3 -m unittest -v
 
 workflows:
   version: 2
-  build-and-test:
+  build_and_test:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              only: master
