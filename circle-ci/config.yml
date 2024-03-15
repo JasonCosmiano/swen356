@@ -25,11 +25,7 @@ jobs:
       - run:
           name: Check Python version
           command: python --version
-
-      - run:
-          name: Start Docker service
-          command: sudo service docker start
-
+          
       - run:
           name: Start server
           command: |
