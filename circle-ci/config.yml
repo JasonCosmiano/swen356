@@ -17,10 +17,21 @@ jobs:
       - checkout
 
       - run:
+          name: Install PostgreSQL client
+          command: sudo apt-get update && sudo apt-get install -y postgresql-client
+
+      - run:
+          name: Initialize Database
+          command: |
+            psql -h $POSTGRES_HOST -U $POSTGRES_USER -d $POSTGRES_DB -c "CREATE ROLE swen356CIUser WITH LOGIN PASSWORD 'bubbles987';"
+            psql -h $POSTGRES_HOST -U $POSTGRES_USER -d $POSTGRES_DB -c "CREATE DATABASE $POSTGRES_DB;"
+            # Add additional commands to create tables, seed data, etc.
+
+      - run:
           name: Install dependencies
           command: |
             pip install -r requirements.txt
-            pip install Flask Flask-RESTful Flask-CORS      
+            pip install Flask Flask-RESTful Flask-CORS
 
       - run:
           name: Check Python version
