@@ -10,22 +10,11 @@ jobs:
       POSTGRES_HOST: localhost
       POSTGRES_PORT: 5432  
       POSTGRES_DB: swen356
-      POSTGRES_USER: swen356CIUser
+      POSTGRES_USER: root
       POSTGRES_PASSWORD: bubbles987
 
     steps:
       - checkout
-
-      - run:
-          name: Install PostgreSQL client
-          command: sudo apt-get update && sudo apt-get install -y postgresql-client
-
-      - run:
-          name: Initialize Database
-          command: |
-            psql -h $POSTGRES_HOST "CREATE ROLE swen356CIUser WITH LOGIN PASSWORD 'bubbles987';"
-            psql -h $POSTGRES_HOST -U $POSTGRES_USER "CREATE DATABASE $POSTGRES_DB;"
-            # Add additional commands to create tables, seed data, etc.
 
       - run:
           name: Install dependencies
