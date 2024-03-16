@@ -7,7 +7,7 @@ jobs:
         environment:
           ENV: CIRCLE
           DATABASE_URL: postgresql://postgres@localhost/circle_test
-      - image: cimg/postgres:13.14
+      - image: circleci/postgres:13.14
         environment:
           POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432  
