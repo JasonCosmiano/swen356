@@ -56,9 +56,11 @@ class FriendActivity(Resource):
       Get friend's activity
       """
       sql_command = """
-         SELECT books.id AS "book_id", books.title, books.genre, books.author 
+         SELECT friends.friend_id, users.username, books.id AS "book_id", books.title, books.genre, books.author 
          FROM books
          INNER JOIN booklist on booklist.bookid = books.id
+		   INNER JOIN friends on friends.user_id = booklist.userid
+		   INNER JOIN users ON users.user_id = friends.friend_id
          WHERE booklist.userid = %(_id)s;
       """
 
