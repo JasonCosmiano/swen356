@@ -5,7 +5,11 @@ jobs:
     docker:
       - image: circleci/python:3.7
         environment:
-          ENV: CIRCLE
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432  
+          POSTGRES_DB: swen356
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: bubbles987
       - image: cimg/postgres:16.2
         environment:
           POSTGRES_HOST: localhost
