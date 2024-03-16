@@ -17,7 +17,8 @@ class FriendsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      friends: []
+      friends: [],
+      user: 0
     };
   }
 

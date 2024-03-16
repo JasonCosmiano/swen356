@@ -66,3 +66,26 @@ class FriendActivity(Resource):
 
       result = exec_get_all_as_dict(sql_command, {'_id':id})
       return result
+
+class PotentialFriends(Resource):
+
+   def get(self, id):
+      """
+      Get potential new friends
+      """
+      sql_command = """
+         SELECT  users.user_id
+         FROM Users
+         INNER JOIN friends on friends.user_id = users.user_id
+         WHERE users.user_id = %(_id)s
+         OR friends.friend_id = %(_id)s;
+      """
+      excluded_users = exec_get_all_as_dict(sql_command, {'_id':id}) # themselves and ppl they are already friends with
+      excluded_list = str([d['user_id'] for d in excluded_users]).replace("[", "(").replace("]", ")")
+      command = """
+         SELECT * 
+         FROM Users
+         WHERE users.user_id NOT IN """ + excluded_list
+
+      result = exec_get_all_as_dict(command)
+      return result
