@@ -35,7 +35,7 @@ jobs:
           name: Start server
           command: |
             python server/server.py &
-            sleep 3
+            sleep 10
 
       - run:
           name: Run unit tests
