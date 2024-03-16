@@ -4,8 +4,13 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.7
+        environment:
+          ENV: CIRCLE
+          DATABASE_URL: postgresql://circleci@localhost/circle_test
       - image: cimg/postgres:13.14
         environment:
+          PGHOST: localhost
+          PGUSER: root
           POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432  
           POSTGRES_DB: swen356
