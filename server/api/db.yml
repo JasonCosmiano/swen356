@@ -1,5 +1,5 @@
 host: localhost
 database: swen356
-user: swen365CIUser
+user: root
 password: bubbles987
 port: 5432
