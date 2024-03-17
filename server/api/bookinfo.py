@@ -1,7 +1,6 @@
 from flask import request
 
 from flask_restful import Resource, reqparse
-from server.api import booklist
 from .db_utils import *
 
 class BookInfo(Resource):
@@ -10,9 +9,9 @@ class BookInfo(Resource):
         Get details of a book
         """
         sql_command = """
-            SELECT * FROM Books WHERE id = %s;
+            SELECT * FROM Books WHERE id = %(_id)s;
         """
-        book = exec_get_one(sql_command, (id))
+        book = exec_get_all_as_dict(sql_command, {'_id':id})
 
         if book:
             return book

@@ -1,5 +1,10 @@
 DROP TABLE IF EXISTS Users CASCADE;
 DROP TABLE IF EXISTS Friends CASCADE;
+DROP TABLE IF EXISTS Books CASCADE;
+DROP TABLE IF EXISTS Reviews CASCADE;
+DROP TABLE IF EXISTS BookList CASCADE;
+DROP TABLE IF EXISTS Comments CASCADE;
+
 
 -- Users table
 -- CREATE TABLE IF NOT EXISTS Users (
@@ -38,8 +43,6 @@ INSERT INTO  Friends
 		(2, 1);
 
 --Books Table
-DROP TABLE IF EXISTS Books CASCADE;
-
 CREATE TABLE Books(
 	id					SERIAL NOT NULL, --isbn?
 	title				VARCHAR(100),
@@ -52,10 +55,10 @@ CREATE TABLE Books(
 	PRIMARY KEY (id)
 );
 
-INSERT INTO Books (title, genre, author, page_count, value)
-	VALUES ('Book A', 'Genre A', 'John Doe', 100, 99.99),
-	('Book B', 'Genre B', 'Jane Doe', 200, 59.99),
-	('Book C', 'Genre C', 'Sally Smith', 300, 16.49);
+INSERT INTO Books (title, genre, author, page_count, publisher, value)
+	VALUES ('Book A', 'Genre A', 'John Doe', 100, 'Publisher A', 99.99),
+	('Book B', 'Genre B', 'Jane Doe', 200, 'Publisher A', 59.99),
+	('Book C', 'Genre C', 'Sally Smith', 300, 'Publisher A', 16.49);
 
 -------------------------------------------------------------------
 -- Reviews Table
