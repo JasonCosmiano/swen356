@@ -36,6 +36,7 @@ jobs:
       - run:
           name: Run unit tests
           command: |
+            ps aux & 
             python -m unittest -v
 
   # Define more jobs if needed (e.g., deploy, etc.)
