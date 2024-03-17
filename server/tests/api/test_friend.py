@@ -27,7 +27,7 @@ class TestFriend(unittest.TestCase):
 
     def test_post_friends(self):
         """ Add a friend """
-        print("\nTEST_POST_NEW_USER")
+        print("\nTEST_POST_NEW_FRIEND")
 
         # make new user
         _friend_id = "3"
@@ -43,4 +43,21 @@ class TestFriend(unittest.TestCase):
         result = post_rest_call(self, "http://localhost:5000/friend/1", jdata, hdr)
         self.assertEqual(result, "FOLLOW FRIEND SUCCESS") 
 
+    def test_get_friend_activity(self):
+        """ Get friend activity """
+        print("\nTEST_GET_FRIEND_ACTIVITY")
+
+        expected = 2
+        actual = get_rest_call(self, 'http://localhost:5000/friendactivity/1') # invoke
+        self.assertEqual(expected, len(actual)) # analyze
+        print("TEST_GET_FRIEND_ACTIVITY PASS")
+
+    def test_get_potential_friends(self):
+        """ Get friend activity """
+        print("\nTEST_GET_POTENTIAL_FRIENDS")
+
+        expected = 2
+        actual = get_rest_call(self, 'http://localhost:5000/addfriends/1') # invoke
+        self.assertEqual(expected, len(actual)) # analyze
+        print("TEST_GET_FRIEND_ACTIVITY PASS")
     

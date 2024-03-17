@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS Reviews CASCADE;
 DROP TABLE IF EXISTS BookList CASCADE;
 DROP TABLE IF EXISTS Comments CASCADE;
 
+
 -- Users table
 -- CREATE TABLE IF NOT EXISTS Users (
 	CREATE TABLE Users (
@@ -42,8 +43,6 @@ INSERT INTO  Friends
 		(2, 1);
 
 --Books Table
-DROP TABLE IF EXISTS Books CASCADE;
-
 CREATE TABLE Books(
 	id					SERIAL NOT NULL, --isbn?
 	title				VARCHAR(100),
