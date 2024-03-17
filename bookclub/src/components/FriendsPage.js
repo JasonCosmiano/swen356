@@ -9,18 +9,13 @@ import {Container, Row, Col, Button} from 'reactstrap';
 
 class FriendsPage extends Component {
 
-  // const friendsList = [
-  //   { name: "Alice", lastMessage: "2" },
-  //   { name: "Bob", lastMessage: "5" },
-  // ];
-
   constructor(props) {
     super(props);
     this.state = {
       friends: [],
-      user: 0,
+      user: 0, // // will figure this out
       potentialFriends: [],
-      newFriendID: 0
+      newFriendID: 0 // will figure this out
     };
 
     // bind
@@ -98,7 +93,7 @@ class FriendsPage extends Component {
 
   postNewFriend = (_friendID) => {
 
-    let url = 'http://localhost:5000/friend/1';
+    let url = 'http://localhost:5000/friend/1'; // TODO temporarily using user 1
     
     let jData = JSON.stringify({
         friend_id: _friendID
@@ -174,12 +169,17 @@ class FriendsPage extends Component {
       }
       </Container>
 
-      <Container style={{marginTop:50, marginLeft:50}}>
+      <Container style={{marginTop:50, marginLeft:1300, width:300, flex:1, flexDirection: 'column', justifyContent: 'flex-end'}} >
+
+      <Row style={{border:'solid', borderColor:'lightgray'}}>
+        <Col xs={12} md={12} lg={12} style={{backgroundColor: 'black', color:'white'}}>Suggested Friends</Col>
+      </Row>
+
         {
         this.state.potentialFriends.map(potFriend=>
           <Row style={{border:'solid', borderColor:'lightgray'}} key={potFriend}>
-              <Col xs={1} md={2} lg={2}>{potFriend.username}</Col>
-              <Col xs={1} md={1} lg={1} style={{ backgroundColor:'white', border:'solid', borderColor:'lightgray'}}>
+              <Col xs={1} md={7} lg={7}>{potFriend.username}</Col>
+              <Col xs={1} md={3} lg={3} style={{ backgroundColor:'white'}}>
                 <Button onClick={()=>this.postNewFriend(potFriend.user_id)}>+</Button>       
               </Col>
           </Row>
