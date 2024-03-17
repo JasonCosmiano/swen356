@@ -59,10 +59,22 @@ class BookPage extends Component {
     render () {
 
       return (
-          <Container style={{marginTop:50, marginLeft:50}}>
+          <Container style={{marginTop:50, marginLeft:200}}>
+
+          <Row style={{border:'solid', borderColor:'lightgray'}}>
+              <Col xs={1} md={1} lg={1} style={{backgroundColor: 'black', color:'white'}}>Title</Col>
+              <Col xs={1} md={1} lg={1} style={{backgroundColor: 'black', color:'white'}}>Genre</Col>
+              <Col xs={1} md={1} lg={1} style={{backgroundColor: 'black', color:'white'}}>Author</Col>
+              <Col xs={1} md={1} lg={1} style={{backgroundColor: 'black', color:'white'}}>Page Count</Col>
+              <Col xs={1} md={1} lg={1} style={{backgroundColor: 'black', color:'white'}}>Publisher</Col>
+              <Col xs={1} md={1} lg={1} style={{backgroundColor: 'black', color:'white'}}>Value</Col>
+              <Col xs={1} md={5} lg={5} style={{backgroundColor: 'black', color:'white'}}>Description</Col>
+              <Col xs={1} md={1} lg={1} style={{backgroundColor: 'black', color:'white'}}></Col>
+          </Row>
+
           {
           this.state.books.map(book=>
-            <Row style={{border:'solid', borderColor:'lightgray'}} key={book}>
+            <Row style={{border:'solid', borderColor:'lightgray', height:200}} key={book}>
                 <Col xs={1} md={1} lg={1}>{book.title}</Col>
                 <Col xs={1} md={1} lg={1}>{book.genre}</Col>
                 <Col xs={1} md={1} lg={1}>{book.author}</Col>
