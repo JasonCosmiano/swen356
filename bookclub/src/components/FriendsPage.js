@@ -4,7 +4,7 @@ import FriendCard from './FriendCard';
 import SuggestionCard from './SuggestionCard';
 import '../FriendsPage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container, Row, Col} from 'reactstrap';
+import {Container, Row, Col, Button} from 'reactstrap';
 
 
 class FriendsPage extends Component {
@@ -18,58 +18,137 @@ class FriendsPage extends Component {
     super(props);
     this.state = {
       friends: [],
-      user: 0
+      user: 0,
+      potentialFriends: [],
+      newFriendID: 0
     };
+
+    // bind
+    this.postNewFriend = this.postNewFriend.bind(this);
   }
 
-    /**
-   * update data given the api response
-   * @param {*} apiResponse 
-   */
-    updateFriendsActivity = (apiResponse) => {
-      this.setState( {friends: apiResponse} );
-    }
+  /**
+ * update data given the api response
+ * @param {*} apiResponse 
+ */
+  updateFriendsActivity = (apiResponse) => {
+    this.setState( {friends: apiResponse} );
+  }
 
-    /**
-   * Get all friends and their information
-   */
-    fetchDataFriends = () => {
-      fetch('http://localhost:5000/friendactivity/1')
-      .then(
-          (response) => 
-          {
-              if (response.status === 200)
+  /**
+ * Get all friends and their information
+ */
+  fetchDataFriends = () => {
+    fetch('http://localhost:5000/friendactivity/1') // TODO temporarily using user 1
+    .then(
+        (response) => 
+        {
+            if (response.status === 200)
+            {
+              return (response.json()) ;
+            }
+            else
+            {
+                console.log("HTTP error:" + response.status + ":" +  response.statusText);
+                return ([ ["status ", response.status]]);
+            }
+        }
+        )//The promise response is returned, then we extract the json data
+    .then ((jsonOutput) => //jsonOutput now has result of the data extraction
               {
+                  this.updateFriendsActivity(jsonOutput);
+              }
+          )
+    .catch((error) => 
+            {console.log(error);
+                this.updateFriendsActivity("");
+            } )
+  }
+
+  updatePotentialFriends = (apiResponse) => {
+    this.setState( {potentialFriends: apiResponse} );
+  }
+
+  fetchDataPotenitalFriends = () => {
+    fetch('http://localhost:5000/addfriends/1') // TODO temporarily using user 1
+    .then(
+        (response) => 
+        {
+            if (response.status === 200)
+            {
+              return (response.json()) ;
+            }
+            else
+            {
+                console.log("HTTP error:" + response.status + ":" +  response.statusText);
+                return ([ ["status ", response.status]]);
+            }
+        }
+        )//The promise response is returned, then we extract the json data
+    .then ((jsonOutput) => //jsonOutput now has result of the data extraction
+              {
+                  this.updatePotentialFriends(jsonOutput);
+              }
+          )
+    .catch((error) => 
+            {console.log(error);
+                this.updatePotentialFriends("");
+            } )
+  }
+
+  postNewFriend = (_friendID) => {
+
+    let url = 'http://localhost:5000/friend/1';
+    
+    let jData = JSON.stringify({
+        friend_id: _friendID
+        });
+    fetch(url,
+        { method: 'POST',
+        body: jData,
+        headers: {
+                "Content-type": "application/json; charset=UTF-8", 
+                "Access-Control-Allow-Origin": "*"}        
+        })
+    .then(
+        (response) => 
+        {
+            if (response.status === 200) {
+                console.log("setting post friend state");
+
                 return (response.json()) ;
-              }
-              else
-              {
-                  console.log("HTTP error:" + response.status + ":" +  response.statusText);
-                  return ([ ["status ", response.status]]);
-              }
-          }
-          )//The promise response is returned, then we extract the json data
-      .then ((jsonOutput) => //jsonOutput now has result of the data extraction
-                {
-                    this.updateFriendsActivity(jsonOutput);
-                }
-            )
-      .catch((error) => 
-              {console.log(error);
-                  this.updateFriendsActivity("");
-              } )
-    }
+            }
+            else
+                return ([ ["status ", response.status]]);
+        }
+        )//The promise response is returned, then we extract the json data
+    .then ((jsonOutput) => //jsonOutput now has result of the data extraction, but don't need it in this case
+            {
+              // make new friend, to add to list
+              const newFriend = {"friend_id":_friendID};
+
+              this.fetchDataFriends();
+              this.state.friends.push(newFriend);
+              this.setState( {friends: this.state.friends} );  
+              
+              // remove from potential friends list
+              this.setState( {
+                potentialFriends: this.state.potentialFriends.filter(user => user.user_id != _friendID)
+              } );
+            }
+        )
+    .catch((error) => 
+        {console.log(error);
+          this.fetchDataFriends();        
+        } )
+  }
 
   componentDidMount() {
     this.fetchDataFriends();
+    this.fetchDataPotenitalFriends();
   }
 
   render () {
-
-    const suggestedFriends = [
-      { name: "Charlie" },
-      { name: "Dave" },
-    ];
 
     return (
       <div className="friends-list">
@@ -95,12 +174,18 @@ class FriendsPage extends Component {
       }
       </Container>
 
-      <div className="suggested-friends">
-          <h2>Suggested for you</h2>
-          {suggestedFriends.map((suggestion, index) => (
-            <SuggestionCard key={index} name={suggestion.name} onAdd={() => console.log("Add friend")} />
-          ))}
-      </div>
+      <Container style={{marginTop:50, marginLeft:50}}>
+        {
+        this.state.potentialFriends.map(potFriend=>
+          <Row style={{border:'solid', borderColor:'lightgray'}} key={potFriend}>
+              <Col xs={1} md={2} lg={2}>{potFriend.username}</Col>
+              <Col xs={1} md={1} lg={1} style={{ backgroundColor:'white', border:'solid', borderColor:'lightgray'}}>
+                <Button onClick={()=>this.postNewFriend(potFriend.user_id)}>+</Button>       
+              </Col>
+          </Row>
+        )
+        }
+      </Container>
       </div>
     );
   }
