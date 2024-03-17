@@ -31,11 +31,13 @@ jobs:
           name: Start server
           command: |
             python server/server.py &
-            sleep 10
+            sleep 3
 
       - run:
           name: Run unit tests
           command: |
+            python server/server.py &
+            sleep 3 &
             ps aux & 
             python -m unittest -v
 
