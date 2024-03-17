@@ -7,6 +7,7 @@ from api.db_utils import *
 from api.user import User, SingleUser
 from api.friend import Friend
 from api.bookinfo import BookInfo
+from api.friend import Friend, FriendActivity, PotentialFriends
 
 app = Flask(__name__) #create Flask instance
 CORS(app) #Enable CORS on Flask server to work with Nodejs pages
@@ -16,6 +17,8 @@ api.add_resource(User, '/user')
 api.add_resource(SingleUser, '/user/<int:id>')
 api.add_resource(Friend, '/friend/<int:id>')
 api.add_resource(BookInfo, '/book/<int:id>')
+api.add_resource(FriendActivity, '/friendactivity/<int:id>')
+api.add_resource(PotentialFriends, '/addfriends/<int:id>')
 
 
 if __name__ == '__main__':
