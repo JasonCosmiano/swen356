@@ -26,12 +26,6 @@ jobs:
       - run:
           name: Check Python version
           command: python --version
-          
-      - run:
-          name: Start server
-          command: |
-            python server/server.py &
-            sleep 3
 
       - run:
           name: Run unit tests
