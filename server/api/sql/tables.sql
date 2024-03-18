@@ -75,6 +75,11 @@ CREATE TABLE IF NOT EXISTS Reviews (
 	PRIMARY KEY (id)
 );
 
+INSERT INTO Reviews (user_id, title, book_id, body, rating)
+	VALUES ('1', 'Review1', '1', 'A cool review', 3),
+	('1', 'Review2', '2', 'Another cool review', 4),
+	('2', 'Review1B', '1', 'A cool review from another perspective', 5);
+
 CREATE TABLE IF NOT EXISTS Comments (
 	id SERIAL NOT NULL, 
 	review_id INT NOT NULL,

@@ -6,6 +6,8 @@ from api.db_utils import *
 
 from api.user import User, SingleUser
 from api.friend import Friend
+from api.review import Review, SingleReview, Comments, Comment
+
 
 app = Flask(__name__) #create Flask instance
 CORS(app) #Enable CORS on Flask server to work with Nodejs pages
@@ -14,6 +16,11 @@ api = Api(app) #api router
 api.add_resource(User, '/user')
 api.add_resource(SingleUser, '/user/<int:id>')
 api.add_resource(Friend, '/friend/<int:id>')
+api.add_resource(Review, '/review')
+api.add_resource(SingleReview, '/review/<int:id>')
+api.add_resource(Comments, '/comments/<int:id>')
+api.add_resource(Comment, '/comment')
+
 
 if __name__ == '__main__':
     
