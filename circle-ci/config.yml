@@ -1,31 +1,50 @@
 version: 2.1
-orbs:
-  python: circleci/python@2.0.3
-  heroku: circleci/heroku@1.2.6
 
 jobs:
-  bulld:
+  build:
     docker:
-      - image: cimg/python:3.10
+      - image: circleci/python:3.7
         environment:
-          TEST_DATABASE_URL: postgresql://postgres@localhost/swen356
-
-      - image: cimg/postgres:14.0
+           TEST_DATABASE_URL: postgresql://root@localhost/swen356?sslmode=disable
+      - image: cimg/postgres:16.2
         environment:
-          POSTGRES_USER: postgres
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+          POSTGRES_DB: swen356
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: bubbles987
 
-    executor: python/default
     steps:
       - checkout
-      - run: sudo apt-get update
-      - run: sudo apt-get install postgresql-client
-      - python/install-packages:
-          pkg-manager: pip
-      - run:
-          name: Run tests
-          command: python -m pytest
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - .
 
+      - run:
+          name: Install dependencies
+          command: |
+            pip install -r requirements.txt
+            pip install Flask Flask-RESTful Flask-CORS
+
+      - run:
+          name: Check Python version
+          command: python --version
+          
+      - run:
+          name: Start server
+          command: |
+            python server/server.py &
+            sleep 3
+
+      - run:
+          name: Run unit tests
+          command: |
+            python server/server.py &
+            sleep 7 &
+            ps aux & 
+            python -m unittest -v
+
+  # Define more jobs if needed (e.g., deploy, etc.)
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
