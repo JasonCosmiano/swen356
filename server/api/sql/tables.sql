@@ -52,13 +52,14 @@ CREATE TABLE Books(
 	publisher			VARCHAR(20),
 	value				MONEY,
 	pub_date			DATE,
+    description         TEXT,
 	PRIMARY KEY (id)
 );
 
-INSERT INTO Books (title, genre, author, page_count, value)
-	VALUES ('Book A', 'Genre A', 'John Doe', 100, 99.99),
-	('Book B', 'Genre B', 'Jane Doe', 200, 59.99),
-	('Book C', 'Genre C', 'Sally Smith', 300, 16.49);
+INSERT INTO Books (title, genre, author, page_count, publisher, value, description)
+	VALUES ('Book A', 'Genre A', 'John Doe', 100, 'Publisher A', 99.99, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ...'),
+	('Book B', 'Genre B', 'Jane Doe', 200, 'Publisher A', 59.99, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ...'),
+	('Book C', 'Genre C', 'Sally Smith', 300, 'Publisher A', 16.49, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ...');
 
 -------------------------------------------------------------------
 -- Reviews Table
@@ -84,17 +85,16 @@ INSERT INTO Books (title, genre, author, page_count, value)
 
 -- CREATE TABLE IF NOT EXISTS BookList (
     CREATE TABLE BookList (
-        id SERIAL NOT NULL,
         userID INT NOT NULL,
         bookID INT NOT NULL,
         FOREIGN KEY (userID) REFERENCES Users(user_id),
         FOREIGN KEY (bookID) REFERENCES Books(id),
-        PRIMARY KEY (id)
+        PRIMARY KEY (userID, bookID)
     );
 
     INSERT INTO BookList
-    VALUES (1,1,2),
-    (2,1,3);
+    VALUES (1,2),
+    (1,3);
 
 -------------------------------------------------------------------
 -- Comments Table
