@@ -6,7 +6,8 @@ from .db_utils import *
 class BookList(Resource):
     def get(self, id):
         sql_command = """
-        SELECT Books.title AS BOOK_TITLE,
+        SELECT Books.id,
+                  Books.title AS BOOK_TITLE,
                   Books.genre AS GENRE,
                   Books.author AS AUTHOR,
                   Books.page_count AS PAGE_COUNT
@@ -24,7 +25,7 @@ class BookList(Resource):
 
     def post(self, id):
         parser = reqparse.RequestParser()
-        parser.add_argument('book_id', type=int, required=True)
+        parser.add_argument('book_id', type=str, required=True)
         args = parser.parse_args()
         book_id = args['book_id']
 

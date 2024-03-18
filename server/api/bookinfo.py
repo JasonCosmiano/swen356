@@ -72,7 +72,7 @@ class AllBooks(Resource):
         Get info off all books
         """
         sql_command = """ 
-        SELECT title, genre, author, page_count, publisher, value, description
+        SELECT id, title, genre, author, page_count, publisher, value, description
         FROM Books; """
 
         return exec_get_all_as_dict(sql_command, {'_id':id})
