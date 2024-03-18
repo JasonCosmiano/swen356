@@ -147,6 +147,7 @@ class BookPage extends Component {
     render () {
 
       return (
+        
           <Container style={{marginTop:50, marginLeft:200}}>
 
           <Row style={{border:'solid', borderColor:'lightgray'}}>

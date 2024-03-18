@@ -13,7 +13,8 @@ class Profile extends Component {
         super(props);
         this.state = {
             profile: [],
-            showEditModal: false
+            showEditModal: false,
+            booklist: []
         };
     
         //binds
@@ -59,8 +60,48 @@ class Profile extends Component {
                 } )
     }
 
+    /**
+     * update data given the api response
+     * @param {*} apiResponse 
+     */
+    updateBookList = (apiResponse) => {
+    this.setState( {booklist: apiResponse} );
+    }
+
+    /**
+     * Get booklist
+     */
+    fetchDataBookList = () => {
+    fetch('http://localhost:5000/booklist/1') // TODO temporarily using user 1
+    .then(
+        (response) => 
+        {
+            if (response.status === 200)
+            {
+                return (response.json()) ;
+            }
+            else
+            {
+                console.log("HTTP error:" + response.status + ":" +  response.statusText);
+                return ([ ["status ", response.status]]);
+            }
+        }
+        )//The promise response is returned, then we extract the json data
+    .then ((jsonOutput) => //jsonOutput now has result of the data extraction
+                {
+                    this.updateBookList(jsonOutput);
+                }
+            )
+    .catch((error) => 
+            {console.log(error);
+                this.updateBookList("");
+            } )
+    }
+
+
     componentDidMount() {
         this.fetchDataProfile();
+        this.fetchDataBookList();
     }
 
 
@@ -168,7 +209,31 @@ class Profile extends Component {
 
                     </CardBody>
                 </Card>
+
+                <Container style={{marginTop:50, marginLeft:200, width:1000}}>
+
+                <Row style={{border:'solid', borderColor:'lightgray'}}>
+                    <Col xs={12} md={12} lg={12} style={{backgroundColor: 'lightblue', color:'black'}}>My Book List</Col>
+                </Row>
+
+                <Row style={{border:'solid', borderColor:'lightgray'}}>
+                    <Col xs={4} md={4} lg={4} style={{backgroundColor: 'black', color:'white'}}>Title</Col>
+                    <Col xs={4} md={4} lg={4} style={{backgroundColor: 'black', color:'white'}}>Genre</Col>
+                    <Col xs={4} md={4} lg={4} style={{backgroundColor: 'black', color:'white'}}>Author</Col>
+                </Row>
+
+                {
+                this.state.booklist.map(book=>
+                <Row style={{border:'solid', borderColor:'lightgray'}} key={book}>
+                    <Col xs={4} md={4} lg={4}>{book.book_title}</Col>
+                    <Col xs={4} md={4} lg={4}>{book.genre}</Col>
+                    <Col xs={4} md={4} lg={4}>{book.author}</Col>
+                </Row>
+                )
+                }
+                </Container>
             </div>
+
         );
     }
 }
