@@ -1,0 +1,16 @@
+/* src/components/ReactionButtons.css */
+.reaction-buttons {
+    display: flex;
+    justify-content: center; /* This will center the buttons */
+    padding: 10px 0; /* Adds padding above and below the buttons */
+    margin-left: 20px;
+  }
+  
+  .reaction-buttons button {
+    margin: 0 5 px;
+    font-size: 46px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  

@@ -1,0 +1,28 @@
+/* SuggestionCard.css */
+.suggestion-card {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+    margin-left: 23.5em;
+    width: 25em;
+  }
+  
+  .suggestion-profile-picture {
+    width: 50px;
+    height: 50px;
+    background-color: #ddd;
+    margin-right: 10px;
+  }
+  
+  .suggestion-info {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+  
+  .suggestion-info button {
+    /* Style button here */
+  }
+  
