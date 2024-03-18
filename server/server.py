@@ -3,6 +3,7 @@ from flask_restful import Resource, Api
 from flask_cors import CORS
 
 from api.db_utils import *
+from api.load_books import *
 
 from api.user import User, SingleUser
 from api.friend import Friend, NewFriend
@@ -22,5 +23,6 @@ if __name__ == '__main__':
     # sql file pending
     exec_sql_file('sql/tables.sql')
     # call load_books.py
+    loadBooks()
     print("Starting flask")
     app.run(debug=True), #starts Flask
