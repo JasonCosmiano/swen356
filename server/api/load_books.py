@@ -1,33 +1,52 @@
 import requests
-# import db_utils
+# from db_utils import *
 
-# search_endpoint = r'https://openlibrary.org/search.json?q='
-# query = r'horror'
+genres = ['romance', 'horror', 'children', 'fiction', 'nonfiction', 'mystery', 'fantasy', 'scifi', 'history']
 
-# r = requests.get(search_endpoint+query)
-# print(r.status_code)
-# print(r.text)
+for req_genre in genres:
 
-subject_endpoint = r'https://openlibrary.org/subjects/romance.json?limit=1?details=true'
-response = requests.get(subject_endpoint)
-print(response.status_code)
-# print(response.json())
-resp_dict = dict(response.json())
+    endpoint = rf'https://openlibrary.org/subjects/{req_genre}.json?details=true'
+    response = requests.get(endpoint)
+    try:
+        resp_dict = dict(response.json())
+    except requests.exceptions.JSONDecodeError as e:
+        pass
 
-for key in resp_dict:
-    print()
-    print(key)
-    print(resp_dict[key])
+    # Take a look at the response
+    # print(response.status_code)
+    # with open(r'server\api\response.json', 'w') as f:
+    #     f.write(response.text)
 
-print("--------WORKS--------")
-works = resp_dict['works']
-for work in works:
-    work_dict = dict(work)
-    # print(work)
-    print(work_dict.keys())
-    title = work_dict['title']
-    genre = work_dict['subject']
-    author = work_dict['authors']
-    page_count = 0
-    publisher = 'first_publish_year'
-    value = 0
+    # for key in resp_dict:
+    #     print()
+    #     print(key)
+    #     print(resp_dict[key])
+
+    # Get the list of books ("works" field in JSON response) and 
+    # iterate over it, converting each "work" to a dictionary and
+    # parsing out information using the keys
+    print(f"--------WORKS: {req_genre}--------")
+    works = resp_dict['works']
+    for work in works:
+        work_dict = dict(work)
+
+        # Extract book attributes
+        title = work_dict['title']
+        genre = req_genre
+        author = work_dict['authors'][0]['name']
+        page_count = 0
+        # publisher = work_dict['publishers'][0]['name']
+        publish_year = work_dict['first_publish_year']
+        value = 0
+
+        # Sanity check
+        print(f"Title: {title}, Genre: {genre}, Author: {author}, Pages: {page_count}, Publish Year: {publish_year}, Value: {value}")   
+       
+       # Insert into Books Table
+        sql_command = """
+            INSERT INTO Books((title, genre, author, pub_date)
+            VALUES(%s, %s, %s, %s)
+        """
+        # result = exec_commit(sql_command, (title, genre, author, publish_year))
+       
+       
