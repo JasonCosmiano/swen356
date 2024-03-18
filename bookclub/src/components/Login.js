@@ -6,41 +6,8 @@ const Login = (props) => {
   const [loginError, setLoginError] = useState('')
 
   const onButtonClick = () => {
-    // checkLoginInfoMatch(loginInfoMatch => {
-    //     if(loginInfoMatch)
-    //         loginInfoMatch()
-    //     else{
-    //         setLoginError("Please check your info and try again")
-    //     }
-    // })
     login()
   }
-
-//   const checkLoginInfoMatch = (callback) => {
-//     fetch('http://localhost:5000/user')
-//     .then(
-//         (response) => 
-//         {
-//             if (response.status === 200)
-//             {
-//               return (response.json()) ;
-//             }
-//             else
-//             {
-//                 console.log("HTTP error:" + response.status + ":" +  response.statusText);
-//                 return ([ ["status ", response.status]]);
-//             }
-//         })
-//         .then((jsonOutput) =>{
-//             for(let i = 0; i < jsonOutput.length; i++){
-//                 if(jsonOutput[i].username == this.username && jsonOutput[i].password == this.password){
-//                     login()
-//                     break
-//                 }
-//             }
-//         }
-//         )
-//   }
 
   const login = () => {
     let jData = JSON.stringify({
