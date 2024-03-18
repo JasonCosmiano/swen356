@@ -6,6 +6,7 @@ import RecentActivity from './components/RecentActivity';
 import FriendsPage from './components/FriendsPage';
 import './App.css';
 import BookPage from './components/BookPage';
+import Profile from './components/Profile';
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -23,6 +24,8 @@ const App = () => {
         return <FriendsPage />;
       case 'books':
         return <BookPage />;
+      case 'profile':
+        return <Profile />;
       default:
         return (
           <div className="content">
