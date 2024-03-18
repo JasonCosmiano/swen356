@@ -36,9 +36,9 @@ jobs:
       - run:
           name: Run unit tests
           command: |
-            python server/server.py &
-            sleep 7 &
-            ps aux & 
+            python server/server.py 
+            sleep 7 
+            ps aux  
             python -m unittest -v
 
   # Define more jobs if needed (e.g., deploy, etc.)
