@@ -5,9 +5,8 @@ from flask_cors import CORS
 from api.db_utils import *
 
 from api.user import User, SingleUser
-from api.friend import Friend
 from api.review import Review, SingleReview, Comments, Comment
-
+from api.friend import Friend, FriendActivity, PotentialFriends
 
 app = Flask(__name__) #create Flask instance
 CORS(app) #Enable CORS on Flask server to work with Nodejs pages
@@ -20,6 +19,8 @@ api.add_resource(Review, '/review')
 api.add_resource(SingleReview, '/review/<int:id>')
 api.add_resource(Comments, '/comments/<int:id>')
 api.add_resource(Comment, '/comment')
+api.add_resource(FriendActivity, '/friendactivity/<int:id>')
+api.add_resource(PotentialFriends, '/addfriends/<int:id>')
 
 
 if __name__ == '__main__':

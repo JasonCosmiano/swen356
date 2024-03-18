@@ -1,0 +1,17 @@
+/* FriendsPage.css */
+.friends-page {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  .friends-list,
+  .suggested-friends {
+    width: 50%; 
+  }
+
+  .suggested-friends h2 {
+    margin-left: 375px;
+    margin-top:  60px;
+  }
+  
