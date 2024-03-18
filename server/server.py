@@ -7,6 +7,7 @@ from api.db_utils import *
 from api.user import User, SingleUser
 from api.friend import Friend
 from api.bookinfo import BookInfo, AllBooks
+from api.booklist import BookList
 from api.friend import Friend, FriendActivity, PotentialFriends
 
 app = Flask(__name__) #create Flask instance
@@ -17,6 +18,7 @@ api.add_resource(User, '/user')
 api.add_resource(SingleUser, '/user/<int:id>')
 api.add_resource(Friend, '/friend/<int:id>')
 api.add_resource(BookInfo, '/book/<int:id>')
+api.add_resource(BookList, '/booklist/<int:id>')
 api.add_resource(FriendActivity, '/friendactivity/<int:id>')
 api.add_resource(PotentialFriends, '/addfriends/<int:id>')
 api.add_resource(AllBooks, '/books')

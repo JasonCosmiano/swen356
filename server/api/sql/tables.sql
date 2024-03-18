@@ -85,17 +85,16 @@ INSERT INTO Books (title, genre, author, page_count, publisher, value, descripti
 
 -- CREATE TABLE IF NOT EXISTS BookList (
     CREATE TABLE BookList (
-        id SERIAL NOT NULL,
         userID INT NOT NULL,
         bookID INT NOT NULL,
         FOREIGN KEY (userID) REFERENCES Users(user_id),
         FOREIGN KEY (bookID) REFERENCES Books(id),
-        PRIMARY KEY (id)
+        PRIMARY KEY (userID, bookID)
     );
 
     INSERT INTO BookList
-    VALUES (1,1,2),
-    (2,1,3);
+    VALUES (1,2),
+    (1,3);
 
 -------------------------------------------------------------------
 -- Comments Table

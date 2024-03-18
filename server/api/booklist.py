@@ -12,10 +12,10 @@ class BookList(Resource):
                   Books.page_count AS PAGE_COUNT
             FROM BookList 
             INNER JOIN Books ON Books.id = BookList.bookID 
-            WHERE BookList.userID = %s;
+            WHERE BookList.userID = %(_id)s;
         """
 
-        result = exec_get_all_as_dict(sql_command, (id))
+        result = exec_get_all_as_dict(sql_command, {'_id':id})
 
         if not result:
             return "USER DOES NOT EXIST"
