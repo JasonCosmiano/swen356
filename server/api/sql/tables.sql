@@ -1,10 +1,11 @@
 DROP TABLE IF EXISTS Users CASCADE;
 DROP TABLE IF EXISTS Friends CASCADE;
-DROP TABLE IF EXISTS Books CASCADE;
 DROP TABLE IF EXISTS Reviews CASCADE;
-DROP TABLE IF EXISTS BookList CASCADE;
+DROP TABLE IF EXISTS Books CASCADE;
 DROP TABLE IF EXISTS Comments CASCADE;
 DROP TABLE IF EXISTS Reactions CASCADE;
+DROP TABLE IF EXISTS BookList CASCADE;
+
 
 
 -- Users table
@@ -53,60 +54,64 @@ CREATE TABLE Books(
 	publisher			VARCHAR(20),
 	value				MONEY,
 	pub_date			DATE,
+    description         TEXT,
 	PRIMARY KEY (id)
 );
 
-INSERT INTO Books (title, genre, author, page_count, value)
-	VALUES ('Book A', 'Genre A', 'John Doe', 100, 99.99),
-	('Book B', 'Genre B', 'Jane Doe', 200, 59.99),
-	('Book C', 'Genre C', 'Sally Smith', 300, 16.49);
+INSERT INTO Books (title, genre, author, page_count, publisher, value, description)
+	VALUES ('Book A', 'Genre A', 'John Doe', 100, 'Publisher A', 99.99, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ...'),
+	('Book B', 'Genre B', 'Jane Doe', 200, 'Publisher A', 59.99, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ...'),
+	('Book C', 'Genre C', 'Sally Smith', 300, 'Publisher A', 16.49, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ...');
+
 
 -------------------------------------------------------------------
 -- Reviews Table
 
 -- CREATE TABLE IF NOT EXISTS Reviews (
-    CREATE TABLE Reviews (
-        id SERIAL NOT NULL,
-        userID INT NOT NULL,
-        title VARCHAR(50) NOT NULL,
-        bookID INT NOT NULL,
-        content VARCHAR(500) NOT NULL,
-        FOREIGN KEY (userID) REFERENCES Users(user_id),
-        FOREIGN KEY (bookID) REFERENCES Books(id),
-        PRIMARY KEY (id)
-    );
+CREATE TABLE Reviews (
+	id SERIAL NOT NULL, 
+	user_id INT NOT NULL, 
+	FOREIGN KEY (user_id) REFERENCES Users(user_id),
+	title VARCHAR (255) NOT NULL, 
+	book_id INT NOT NULL, 
+	FOREIGN KEY (book_id) REFERENCES Books(id),
+	body VARCHAR (255) NOT NULL,
+	rating int NOT NULL, 
+	PRIMARY KEY (id)
+);
 
-    INSERT INTO Reviews
-    VALUES (1, 1, 'Yucky', 1, 'HELLO WORLD'),
-    (2, 1, 'What?', 2, 'Book review #2');
+INSERT INTO Reviews (user_id, title, book_id, body, rating)
+	VALUES ('1', 'Review1', '1', 'A cool review', 3),
+	('1', 'Review2', '2', 'Another cool review', 4),
+	('2', 'Review1B', '1', 'A cool review from another perspective', 5);
 
 -------------------------------------------------------------------
 -- BookList Table
 
 -- CREATE TABLE IF NOT EXISTS BookList (
     CREATE TABLE BookList (
-        id SERIAL NOT NULL,
         userID INT NOT NULL,
         bookID INT NOT NULL,
         FOREIGN KEY (userID) REFERENCES Users(user_id),
         FOREIGN KEY (bookID) REFERENCES Books(id),
-        PRIMARY KEY (id)
+        PRIMARY KEY (userID, bookID)
     );
 
     INSERT INTO BookList
-    VALUES (1,1,2),
-    (2,1,3);
+    VALUES (1,2),
+    (1,3);
 
 -------------------------------------------------------------------
 -- Comments Table
 
 -- CREATE TABLE IF NOT EXISTS Comments (
     CREATE TABLE Comments (
-        id SERIAL NOT NULL,
-        reviewID INT NOT NULL,
-        userID INT NOT NULL,
-        content VARCHAR(500) NOT NULL,
-        FOREIGN KEY (reviewID) REFERENCES Reviews(id),
+        id SERIAL NOT NULL, 
+        review_id INT NOT NULL,
+        FOREIGN KEY (review_id) REFERENCES Reviews(id),
+        user_id INT NOT NULL, 
+        FOREIGN KEY (user_id) REFERENCES Users(user_id),
+        reply VARCHAR (255) NOT NULL,
         PRIMARY KEY (id)
     );
 
