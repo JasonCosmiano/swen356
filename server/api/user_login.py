@@ -27,7 +27,8 @@ def login_user(username, password):
     WHERE username = %s
     AND password = %s"""
 
-    result = exec_get_one(sql_command, username, password)  
+    query = (username, password)
+    result = exec_get_one(sql_command, query)  
     if result == None:
         return "Invalid username or password. Try again"
     else:
