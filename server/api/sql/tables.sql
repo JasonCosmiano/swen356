@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS Books CASCADE;
 DROP TABLE IF EXISTS Reviews CASCADE;
 DROP TABLE IF EXISTS BookList CASCADE;
 DROP TABLE IF EXISTS Comments CASCADE;
+DROP TABLE IF EXISTS Reactions CASCADE;
 
 
 -- Users table
@@ -112,3 +113,25 @@ INSERT INTO Books (title, genre, author, page_count, value)
     INSERT INTO Comments
     VALUES (1, 1, 2, 'asdopakdafa'),
     (2, 1, 3, 'gjfdiosgjdsfd');
+
+-------------------------------------------------------------------
+-- Reactions Table
+
+-- CREATE TABLE IF NOT EXISTS Reactions (
+    CREATE TABLE Reactions (
+        bookID INT NOT NULL,
+        reactorID INT NOT NULL,
+        heart BOOLEAN DEFAULT FALSE,
+        thumbsUp BOOLEAN DEFAULT FALSE,
+        thumbsDown BOOLEAN DEFAULT FALSE,
+        crying BOOLEAN DEFAULT FALSE,
+        FOREIGN KEY (bookID) REFERENCES Books(id),
+        FOREIGN KEY (reactorID) REFERENCES Users(user_id),
+        PRIMARY KEY (bookID, reactorID)
+    );
+
+    INSERT INTO Reactions
+    VALUES  (1, 2, TRUE, TRUE, FALSE, TRUE),
+            (1, 3, TRUE, TRUE, FALSE, TRUE),
+            (1, 4, FALSE, FALSE, TRUE, TRUE),
+            (1, 1, FALSE, FALSE, FALSE, FALSE);
