@@ -2,6 +2,7 @@ from flask import request
 
 from flask_restful import Resource, reqparse
 from .db_utils import *
+from collections import Counter
 
 class BookList(Resource):
     def get(self, id):
@@ -17,10 +18,9 @@ class BookList(Resource):
         """
 
         result = exec_get_all_as_dict(sql_command, {'_id':id})
-
+        
         if not result:
             return "USER DOES NOT EXIST"
-
         return result
 
     def post(self, id):
@@ -43,7 +43,7 @@ class BookList(Resource):
 
         return "BOOK ADDED TO BOOKLIST SUCCESSFULLY"
 
-    def delete(selfd, id):
+    def delete(self, id):
         parser = reqparse.RequestParser()
         parser.add_argument('book_id', type=int, required=True)
         args = parser.parse_args()
@@ -103,3 +103,34 @@ class BookList(Resource):
             return "NO BOOKS FOUND FOR THE GIVEN FILTER CRITERIA"
 
         return result
+
+class UserStats(Resource):
+    def get(self, id):
+        sql_command = """
+        SELECT Books.id,
+                  Books.title AS BOOK_TITLE,
+                  Books.genre AS GENRE,
+                  Books.author AS AUTHOR,
+                  Books.page_count AS PAGE_COUNT
+            FROM BookList 
+            INNER JOIN Books ON Books.id = BookList.bookID 
+            WHERE BookList.userID = %(_id)s;
+        """
+
+        result = exec_get_all_as_dict(sql_command, {'_id':id})
+
+        if not result:
+            return "USER DOES NOT EXIST"
+        authorList = []
+        genreList = []
+        page_count = 0
+        for book in result:
+            authorList.append(book['author'])
+            genreList.append(book['genre'])
+            page_count += book['page_count']
+        author_occurence_count = Counter(authorList)
+        genre_occurence_count = Counter(genreList)
+        result = {"page_count": page_count, "author": author_occurence_count.most_common(1)[0][0], "genre": genre_occurence_count.most_common(1)[0][0] }
+        return result
+
+    
