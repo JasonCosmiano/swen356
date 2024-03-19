@@ -92,7 +92,7 @@ class SingleReview(Resource):
        return "PUT command success"
     
 class ReviewUser(Resource):
-    def getUserReviews(self):
+    def get(self):
        parser = reqparse.RequestParser()
        parser.add_argument('user_id', type=int)
        
@@ -105,7 +105,7 @@ class ReviewUser(Resource):
        return result
 
 class ReviewBook(Resource):
-    def getBookReviews(self):
+    def get(self):
        parser = reqparse.RequestParser()
        parser.add_argument('book_id', type=int)
        
@@ -119,11 +119,11 @@ class ReviewBook(Resource):
 
 class Comments(Resource):
    
-    def getCommentsReview(self, review_id):
+    def get(self, id):
        parser = reqparse.RequestParser()
 
        sql_command = """SELECT * FROM Comments where review_id = %s;"""
-       result = exec_get_all_as_dict(sql_command,(str(review_id)))
+       result = exec_get_all_as_dict(sql_command,(str(id)))
        return result
     
 class Comment(Resource):
