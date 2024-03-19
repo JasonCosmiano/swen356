@@ -1,0 +1,57 @@
+/* BookPage.css */
+.book-page {
+    max-width: 800px; 
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc; 
+    background-color: #fff; 
+  }
+  
+  .book-description {
+    margin-bottom: 20px;
+  }
+  
+  .book-content {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .book-image {
+    width: 330px; 
+    height: 510px;
+    margin-left: 20px; 
+    background-color: #ddd;
+    margin-right: 20px;
+  }
+  
+  .book-actions {
+    flex: 1; /* This allows the actions div to take up the remaining space */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .action-btn {
+    margin-bottom: 10px;
+    font-size: 12px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #ddd;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+  }
+  
+  .purchase-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .book-tags {
+    margin-top: 20px;
+  }
+  
+  .book-tags span {
+    background-color: #eee;
+    padding: 5px;
+    margin-right: 5px;
+  }
+  

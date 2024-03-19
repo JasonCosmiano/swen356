@@ -10,45 +10,82 @@ class Friend(Resource):
        Get friends's list of a user
        """
        
-       # TODO need to do an inner join for usernames
        sql_command = """
-            SELECT * 
-            FROM Friends
-            WHERE user_id = %(_id)s;"""
+            SELECT Users.username AS FRIEND_USERNAME, 
+                  Users.user_id AS FRIEND_ID
+            FROM Friends 
+            INNER JOIN Users ON Users.user_id = Friends.friend_id 
+            WHERE Friends.user_id = %(_id)s ;
+      """
        result = exec_get_all_as_dict(sql_command, {'_id':id})
        
-       if result == 0:
+       if result == []:
           return "USER DOES NOT EXIST"
+       
        return result
-
-class NewFriend(Resource):
-    def post(self):
+    
+    def post(self, id):
        """
-       Send a friend request
+       Follow a friend
        """
        # body params
        parser = reqparse.RequestParser()
-       parser.add_argument('user_id', type=str)
        parser.add_argument('friend_id', type=str)
        
        args = parser.parse_args()
-       user_id = args['user_id']
        friend_id = args['friend_id']
 
-       if user_id == None or friend_id == None:
+       if id == None or friend_id == None:
           return "INVALID REQUEST, MISSING PARAMETER"
        
-       # 2 INSERT statements, for both people
        sql_command = """
             INSERT INTO Friends(user_id, friend_id)
             VALUES(%s, %s); 
         """
-       exec_commit(sql_command, (user_id, friend_id))
+       result = exec_insert_update_delete(sql_command, (id, friend_id))
 
-       sql_command2 = """
-            INSERT INTO Friends(friend_id, user_id)
-            VALUES(%s, %s); 
-        """
-       result = exec_commit(sql_command2, (user_id, friend_id))
+       if result == 0:
+          return "FAILED TO FOLLOW FRIEND"
 
-       return result
+       return "FOLLOW FRIEND SUCCESS"    
+    
+class FriendActivity(Resource):
+   
+   def get(self, id):
+      """
+      Get friend's activity
+      """
+      sql_command = """
+         SELECT friends.friend_id, users.username, books.id AS "book_id", books.title, books.genre, books.author 
+         FROM books
+         INNER JOIN booklist on booklist.bookid = books.id
+		   INNER JOIN friends on friends.user_id = booklist.userid
+		   INNER JOIN users ON users.user_id = friends.friend_id
+         WHERE booklist.userid = %(_id)s;
+      """
+
+      result = exec_get_all_as_dict(sql_command, {'_id':id})
+      return result
+
+class PotentialFriends(Resource):
+
+   def get(self, id):
+      """
+      Get potential new friends
+      """
+      sql_command = """
+         SELECT  users.user_id
+         FROM Users
+         INNER JOIN friends on friends.user_id = users.user_id
+         WHERE users.user_id = %(_id)s
+         OR friends.friend_id = %(_id)s;
+      """
+      excluded_users = exec_get_all_as_dict(sql_command, {'_id':id}) # themselves and ppl they are already friends with
+      excluded_list = str([d['user_id'] for d in excluded_users]).replace("[", "(").replace("]", ")")
+      command = """
+         SELECT * 
+         FROM Users
+         WHERE users.user_id NOT IN """ + excluded_list
+
+      result = exec_get_all_as_dict(command)
+      return result
