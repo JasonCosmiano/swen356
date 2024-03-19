@@ -8,10 +8,11 @@ def loadBooks() :
 
         endpoint = rf'https://openlibrary.org/subjects/{req_genre}.json?details=true'
         response = requests.get(endpoint)
-        try:
-            resp_dict = dict(response.json())
-        except requests.exceptions.JSONDecodeError as e:
-            pass
+
+        if response.status_code != 200:
+            continue
+            
+        resp_dict = dict(response.json())
 
         # Take a look at the response
         # print(response.status_code)
