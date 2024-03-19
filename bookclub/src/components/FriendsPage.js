@@ -128,7 +128,7 @@ class FriendsPage extends Component {
               
               // remove from potential friends list
               this.setState( {
-                potentialFriends: this.state.potentialFriends.filter(user => user.user_id != _friendID)
+                potentialFriends: this.state.potentialFriends.filter(user => user.user_id !== _friendID)
               } );
             }
         )

@@ -8,7 +8,7 @@ const NavigationBar = ({ setCurrentPage }) => (
     <div onClick={() => setCurrentPage('friends')}>Friends</div>
     <div onClick={() => setCurrentPage('home')}>Review</div>
     <div onClick={() => setCurrentPage('books')}>Books</div>
-    <div onClick={() => setCurrentPage('home')}>Profile</div>
+    <div onClick={() => setCurrentPage('profile')}>Profile</div>
   </nav>
 );
 
