@@ -98,7 +98,7 @@ class ReviewUser(Resource):
        
        args = parser.parse_args()
        user_id = args['user_id']
-       sql_command = """SELECT * FROM Review WHERE user_id = '%s';"""
+       sql_command = """SELECT * FROM Review WHERE user_id = %s;"""
        result = exec_get_all_as_dict(sql_command, (user_id))
        if(result == []):
          result = "USER REVIEWS DO NOT EXIST"
@@ -111,7 +111,7 @@ class ReviewBook(Resource):
        
        args = parser.parse_args()
        book_id = args['book_id']
-       sql_command = """SELECT * FROM Review WHERE book_id = '%s';"""
+       sql_command = """SELECT * FROM Review WHERE book_id = %s;"""
        result = exec_get_all_as_dict(sql_command, (book_id))
        if(result == []):
          result = "BOOK REVIEWS DO NOT EXIST"
@@ -122,7 +122,7 @@ class Comments(Resource):
     def getCommentsReview(self, review_id):
        parser = reqparse.RequestParser()
 
-       sql_command = """SELECT * FROM Comments where review_id = '%s';"""
+       sql_command = """SELECT * FROM Comments where review_id = %s;"""
        result = exec_get_all_as_dict(sql_command,(str(review_id)))
        return result
     
