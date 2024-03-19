@@ -6,7 +6,6 @@ from api.db_utils import *
 
 from api.user import User, SingleUser
 from api.review import Review, SingleReview, Comments, Comment
-from api.friend import Friend
 from api.bookinfo import BookInfo, AllBooks
 from api.booklist import BookList
 from api.friend import Friend, FriendActivity, PotentialFriends
