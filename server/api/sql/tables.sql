@@ -52,7 +52,7 @@ CREATE TABLE Books(
 	page_count			INT,
 	publisher			VARCHAR(20),
 	value				MONEY,
-	pub_date			DATE,
+	pub_date			INT,
     description         TEXT,
 	PRIMARY KEY (id)
 );
