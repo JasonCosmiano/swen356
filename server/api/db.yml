@@ -1,0 +1,5 @@
+host: localhost
+database: swen356
+user: root
+password: bubbles987
+port: 5432
