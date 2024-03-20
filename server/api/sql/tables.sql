@@ -115,10 +115,9 @@ INSERT INTO Reviews (user_id, title, book_id, body, rating)
         PRIMARY KEY (id)
     );
 
-    INSERT INTO Comments
-    VALUES (1, 1, 2, 'asdopakdafa'),
-    (2, 1, 3, 'gjfdiosgjdsfd');
-
+    INSERT INTO Comments (review_id, user_id, reply)
+    VALUES (1, 2, 'asdopakdafa'),
+    (1, 3, 'gjfdiosgjdsfd');
 -------------------------------------------------------------------
 -- Reactions Table
 
