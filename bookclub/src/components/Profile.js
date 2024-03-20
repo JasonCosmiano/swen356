@@ -274,7 +274,7 @@ class Profile extends Component {
                 <Container style={{marginTop:50, marginLeft:430, width:1000}}>
 
                 <Row style={{border:'solid', borderColor:'lightgray'}}>
-                    <Col xs={12} md={12} lg={12} style={{backgroundColor: 'lightblue', color:'black'}}>My Book List</Col>
+                    <Col xs={12} md={12} lg={12} style={{backgroundColor: 'lightblue', color:'black'}}>MyList</Col>
                 </Row>
 
                 <Row style={{border:'solid', borderColor:'lightgray'}}>

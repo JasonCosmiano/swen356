@@ -27,9 +27,15 @@ def loadBooks() :
         # Get the list of books ("works" field in JSON response) and 
         # iterate over it, converting each "work" to a dictionary and
         # parsing out information using the keys
+        count = 0
+
         print(f"--------WORKS: {req_genre}--------")
         works = resp_dict['works']
         for work in works:
+
+            if count >= 2:
+                break
+
             work_dict = dict(work)
 
             # Extract book attributes
@@ -50,3 +56,5 @@ def loadBooks() :
                 VALUES(%s, %s, %s, %s)
             """
             exec_insert_update_delete(sql_command, (title, genre, author, publish_year))
+            count += 1
+
