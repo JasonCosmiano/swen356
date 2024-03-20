@@ -8,8 +8,9 @@ from api.load_books import *
 from api.user import User, SingleUser
 from api.review import Review, SingleReview, Comments, Comment
 from api.bookinfo import BookInfo, AllBooks
-from api.booklist import BookList
+from api.booklist import BookList, UserStats
 from api.friend import Friend, FriendActivity, PotentialFriends
+from api.reactions import Reactions
 
 app = Flask(__name__) #create Flask instance
 CORS(app) #Enable CORS on Flask server to work with Nodejs pages
@@ -26,7 +27,9 @@ api.add_resource(BookInfo, '/book/<int:id>')
 api.add_resource(BookList, '/booklist/<int:id>')
 api.add_resource(FriendActivity, '/friendactivity/<int:id>')
 api.add_resource(PotentialFriends, '/addfriends/<int:id>')
+api.add_resource(Reactions, '/reactions')
 api.add_resource(AllBooks, '/books')
+api.add_resource(UserStats, '/userstats/<int:id>')
 
 
 if __name__ == '__main__':
