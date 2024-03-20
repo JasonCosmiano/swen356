@@ -21,10 +21,10 @@ DROP TABLE IF EXISTS BookList CASCADE;
 ) ;
 
 INSERT INTO Users
-	VALUES (1, 'Test', 'password', 'test@rit.edu', 1),
-			(2, 'Test2', 'password', 'test@rit.edu', 2),
-			(3, 'Test3', 'password', 'test@rit.edu', 2),
-			(4, 'Test4', 'password', 'test@rit.edu', 2);
+	VALUES (1, 'waldo', 'password123', 'money@rit.edu', 1),
+			(2, 'tubby', 'password', 'test@rit.edu', 2),
+			(3, 'toes', 'password', 'test@rit.edu', 2),
+			(4, 'bruh', 'password', 'test@rit.edu', 2);
 
 ALTER SEQUENCE Users_user_id_seq RESTART WITH 5;
 
@@ -53,15 +53,15 @@ CREATE TABLE Books(
 	page_count			INT,
 	publisher			VARCHAR(20),
 	value				MONEY,
-	pub_date			DATE,
+	pub_date			INT,
     description         TEXT,
 	PRIMARY KEY (id)
 );
 
 INSERT INTO Books (title, genre, author, page_count, publisher, value, description)
-	VALUES ('Book A', 'Genre A', 'John Doe', 100, 'Publisher A', 99.99, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ...'),
-	('Book B', 'Genre B', 'Jane Doe', 200, 'Publisher A', 59.99, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ...'),
-	('Book C', 'Genre C', 'Sally Smith', 300, 'Publisher A', 16.49, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ...');
+	VALUES ('Rizz 101', 'historical fiction', 'Beavo', 100, 'Penguin Random House', 99.99, 'Learn how to talk to people.'),
+	('Gains', 'health', 'Sam Sulek', 200, 'Macmillan', 59.99, 'Anything is possible with gear.'),
+	('Dune', 'scifi', 'Frank Herbert', 300, 'Chilton Books', 16.49, 'Spice makes everything nice.');
 
 
 -------------------------------------------------------------------

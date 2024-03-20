@@ -31,7 +31,7 @@ jobs:
           name: Run unit tests
           command: |
             python server/server.py &
-            sleep 7 
+            sleep 150 
             ps aux  
             python -m unittest -v
 

@@ -7,6 +7,7 @@ import FriendsPage from './components/FriendsPage';
 import './App.css';
 import BookPage from './components/BookPage';
 import Profile from './components/Profile';
+import Review from './components/Review';
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -26,6 +27,8 @@ const App = () => {
         return <BookPage />;
       case 'profile':
         return <Profile />;
+      case 'review':
+        return <Review />;
       default:
         return (
           <div className="content">

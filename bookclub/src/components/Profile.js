@@ -66,7 +66,7 @@ class Profile extends Component {
      * @param {*} apiResponse 
      */
     updateBookList = (apiResponse) => {
-    this.setState( {booklist: apiResponse} );
+        this.setState( {booklist: apiResponse} );
     }
 
     /**
@@ -153,53 +153,53 @@ class Profile extends Component {
      */
     editProfile = (_username, _password, _email) => {
 
-    // check to see if any are null, if so, then use the previous data
-    if (_username === undefined) {
-        _username = this.state.profile[0].username;
-    }
-
-    if (_password === undefined) {
-        _password = this.state.profile[0].password;  
-    }
-
-    if (_email === undefined) {
-        _email = this.state.profile[0].email;   
-    }
-
-    let url = 'http://localhost:5000/user/1';
-
-    console.log('url: ' + url);
-
-    let jData = JSON.stringify({
-        username: _username,
-        password: _password,
-        email: _email
-        });
-    fetch(url,
-        { method: 'PUT',
-        body: jData,
-        headers: {"Content-type": "application/json; charset=UTF-8", 
-                    "Access-Control-Allow-Origin": "*"}        
-        })
-    .then(
-        (response) => 
-        {
-            if (response.status === 200) {
-                return (response.json()) ;
-            }
-            else
-                return ([ ["status ", response.status]]);
+        // check to see if any are null, if so, then use the previous data
+        if (_username === undefined) {
+            _username = this.state.profile[0].username;
         }
-        )//The promise response is returned, then we extract the json data
-    .then ((jsonOutput) => //jsonOutput now has result of the data extraction, but don't need it in this case
+
+        if (_password === undefined) {
+            _password = this.state.profile[0].password;  
+        }
+
+        if (_email === undefined) {
+            _email = this.state.profile[0].email;   
+        }
+
+        let url = 'http://localhost:5000/user/1';
+
+        console.log('url: ' + url);
+
+        let jData = JSON.stringify({
+            username: _username,
+            password: _password,
+            email: _email
+            });
+        fetch(url,
+            { method: 'PUT',
+            body: jData,
+            headers: {"Content-type": "application/json; charset=UTF-8", 
+                        "Access-Control-Allow-Origin": "*"}        
+            })
+        .then(
+            (response) => 
             {
-                this.fetchDataProfile();
+                if (response.status === 200) {
+                    return (response.json()) ;
+                }
+                else
+                    return ([ ["status ", response.status]]);
             }
-        )
-    .catch((error) => 
-        {console.log(error);
-        this.fetchDataProfile();
-        } )
+            )//The promise response is returned, then we extract the json data
+        .then ((jsonOutput) => //jsonOutput now has result of the data extraction, but don't need it in this case
+                {
+                    this.fetchDataProfile();
+                }
+            )
+        .catch((error) => 
+            {console.log(error);
+            this.fetchDataProfile();
+            } )
 
     }
 
@@ -274,7 +274,7 @@ class Profile extends Component {
                 <Container style={{marginTop:50, marginLeft:430, width:1000}}>
 
                 <Row style={{border:'solid', borderColor:'lightgray'}}>
-                    <Col xs={12} md={12} lg={12} style={{backgroundColor: 'lightblue', color:'black'}}>My Book List</Col>
+                    <Col xs={12} md={12} lg={12} style={{backgroundColor: 'lightblue', color:'black'}}>MyList</Col>
                 </Row>
 
                 <Row style={{border:'solid', borderColor:'lightgray'}}>
