@@ -14,7 +14,8 @@ class Profile extends Component {
         this.state = {
             profile: [],
             showEditModal: false,
-            booklist: []
+            booklist: [],
+            userstats: []
         };
     
         //binds
@@ -98,10 +99,48 @@ class Profile extends Component {
             } )
     }
 
+    /**
+     * update data given the api response
+     * @param {*} apiResponse 
+     */
+    updateUserStats = (apiResponse) => {
+        this.setState( {userstats: apiResponse} );
+        }
+    /**
+     * Get user stats
+     */
+    fetchDataUserStats = () => {
+        fetch('http://localhost:5000/userstats/1') // TODO temporarily using user 1
+        .then(
+            (response) => 
+            {
+                if (response.status === 200)
+                {
+                    return (response.json()) ;
+                }
+                else
+                {
+                    console.log("HTTP error:" + response.status + ":" +  response.statusText);
+                    return ([ ["status ", response.status]]);
+                }
+            }
+            )//The promise response is returned, then we extract the json data
+        .then ((jsonOutput) => //jsonOutput now has result of the data extraction
+                    {
+                        this.updateUserStats(jsonOutput);
+                    }
+                )
+        .catch((error) => 
+                {console.log(error);
+                    this.updateUserStats("");
+                } )
+        }
+
 
     componentDidMount() {
         this.fetchDataProfile();
         this.fetchDataBookList();
+        this.fetchDataUserStats();
     }
 
 
@@ -183,7 +222,8 @@ class Profile extends Component {
 
         return (
             <div>
-                <Card style={{marginTop:50, marginLeft:400, width:300}}>    
+            <div style={{ display: 'flex', allignItems: 'center',justifyContent: 'center',}}>
+                <Card style={{marginTop:50, width:300}}>    
                     <CardHeader>Profile</CardHeader>
                     <CardBody>
                     {
@@ -209,8 +249,29 @@ class Profile extends Component {
 
                     </CardBody>
                 </Card>
-
-                <Container style={{marginTop:50, marginLeft:200, width:1000}}>
+                <Card style={{marginTop:50, width:300}}>    
+                    <CardHeader>User Statistics</CardHeader>
+                    <CardBody>
+                    {
+                        this.state.profile.map(user=>
+                            <CardText>Pages Read: {this.state.userstats.page_count}</CardText>
+                        )
+                    }
+                    {
+                        this.state.profile.map(user=>
+                            <CardText>Favorite Author: {this.state.userstats.author}</CardText>
+                        )
+                    }
+                    {
+                        this.state.profile.map(user=>
+                            <CardText>Favorite Genre: {this.state.userstats.genre}</CardText>
+                        )
+                    }
+                    </CardBody>
+                </Card>
+                </div>
+                <div>
+                <Container style={{marginTop:50, marginLeft:430, width:1000}}>
 
                 <Row style={{border:'solid', borderColor:'lightgray'}}>
                     <Col xs={12} md={12} lg={12} style={{backgroundColor: 'lightblue', color:'black'}}>My Book List</Col>
@@ -232,6 +293,7 @@ class Profile extends Component {
                 )
                 }
                 </Container>
+            </div>
             </div>
 
         );
